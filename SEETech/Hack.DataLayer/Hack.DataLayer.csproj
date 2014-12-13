@@ -57,6 +57,7 @@
     <Compile Include="Entities\UnsignedPractice.cs" />
     <Compile Include="Entities\WomanHealthPractice.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\PracticeBaseRepository.cs" />
     <Compile Include="Repositories\UnsignedPracticeRepository.cs" />
     <Compile Include="Repositories\DentalPracticeRepository.cs" />
     <Compile Include="Repositories\WomanHealthPracticeRepository.cs" />
