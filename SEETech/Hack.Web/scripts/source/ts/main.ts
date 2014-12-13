@@ -24,12 +24,23 @@ app.get('#/info', (context: Sammy.EventContext) => {
 
 
 app.get('#/map', (context: Sammy.EventContext) => {
-    console.log(context);
-    context.partial(partials["map"], (context: Sammy.RenderContext) => {
-        console.log(context);
+    context.partial(partials["map"], (render: Sammy.RenderContext) => {
     });
 });
 
+app.get('#/search', (context: Sammy.EventContext) => {
+    context.partial(partials["search"], (render: Sammy.RenderContext) => {
+
+    });
+});
+app.get('#/list/:json', (context: Sammy.EventContext) => {
+    context.partial(partials["list"], (render: Sammy.RenderContext) => {
+    });
+});
+app.get('#/detail/:id', (context: Sammy.EventContext) => {
+    context.partial(partials["list"], (render: Sammy.RenderContext) => {
+    });
+});
 
 
 
