@@ -22,6 +22,7 @@
     <Content Include="css\vendor\bootcards-android.min.css" />
     <Content Include="css\vendor\bootstrap-theme.min.css" />
     <Content Include="css\vendor\bootstrap.min.css" />
+    <Content Include="main.html" />
     <Content Include="index.html" />
     <Content Include="views\about.html" />
     <Content Include="views\info.html" />
