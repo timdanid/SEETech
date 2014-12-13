@@ -36,21 +36,53 @@
     </div>
     <!-- slide in off canvas menu (mobile only) -->
     <nav class="navmenu offcanvas offcanvas-left">
-        <ul class="nav" data-bind="foreach: sidebar">
-            <li data-bind="css: { active: isActive()}">
-                <a data-bind="href: href, glyphText: {glyph: icon, text: name}"></a>
+        <ul class="nav">
+            <li>
+                <a href="#">
+                    <i class="fa fa-lg fa-dashboard"></i>Karta
+                </a>
+            </li>
+            <li class="active">
+                <a href="">
+                    <i class="fa fa-lg fa-users"></i>Pretraživanje
+                </a>
+            </li>
+            <li>
+                <a href="">
+                    <i class="fa fa-lg fa-users"></i>Zdravstvena zaštita
+                </a>
+            </li>
+            <li>
+                <a href="">
+                    <i class="fa fa-lg fa-users"></i>O HZZO
+                </a>
             </li>
         </ul>
     </nav><!--nav-->
-    <a href="map.html">abc</a>
+    <a href="list.html">abc</a>
+    <!--View container-->
+    <div class="container bootcards-container push-right">
+
+    </div>
     <!-- Cordova reference, this is added to your app when it's built. -->
-    <script src="cordova.js"></script>
-    <script src="scripts/index.js"></script>
     <script src="scripts/vendor/jquery.js"></script>
     <script src="scripts/vendor/bootstrap.min.js"></script>
     <script src="scripts/vendor/bootcards.min.js"></script>
     <script src="scripts/vendor/fastclick.min.js"></script>
-    <script src="scripts/main.js"></script>
- 
+    <script src="scripts/vendor/sammy.js"></script>
+    <script src="scripts/index.js"></script>
+    <script src="scripts/source/ts/router.js"></script>
+    <script src="scripts/source/ts/main.js"></script>
+    <script>
+        bootcards.init({
+            offCanvasHideOnMainClick: true,
+            enableTabletPortraitMode: true,
+            disableRubberBanding: true
+        });
+
+        window.addEventListener('load', function () {
+            FastClick.attach(document.body);
+        }, false);
+    </script>
 </body>
 </html>

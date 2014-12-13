@@ -117,6 +117,8 @@
     <Content Include="css\vendor\bootcards-android.min.css" />
     <Content Include="css\vendor\bootstrap-theme.min.css" />
     <Content Include="css\vendor\bootstrap.min.css" />
+    <Content Include="main.html" />
+    <Content Include="map.html" />
     <Content Include="plugins\org.apache.cordova.geolocation\.fetch.json" />
     <Content Include="plugins\org.apache.cordova.geolocation\CONTRIBUTING.md" />
     <Content Include="plugins\org.apache.cordova.geolocation\doc\de\index.md" />
@@ -465,6 +467,12 @@
     <Content Include="scripts\vendor\knockout.js" />
     <Content Include="scripts\vendor\knockout.mapping.js" />
     <Content Include="scripts\vendor\sammy.js" />
+    <Content Include="views\about.html" />
+    <Content Include="views\detail.html" />
+    <Content Include="views\info.html" />
+    <Content Include="views\list.html" />
+    <Content Include="views\map.html" />
+    <Content Include="views\search.html" />
     <Folder Include="css\source\" />
     <Folder Include="images\" />
     <Content Include="merges\android\scripts\android2.3-jscompat.js" />
