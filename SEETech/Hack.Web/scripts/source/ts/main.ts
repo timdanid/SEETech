@@ -2,6 +2,7 @@
 /// <reference path="../../typing/sammy/sammyjs.d.ts" />
 
 var app: Sammy.Application = Sammy();
+(<any>app).element_selector = "#container";
 var router: Hack.Router = new Hack.Router("http://hackapi.azurewebsites.net/api/");
 
 var partials: { [key: string]: string; } = {};
@@ -11,7 +12,6 @@ partials["info"] = "/views/info.html";
 partials["list"] = "/views/list.html";
 partials["map"] = "/views/map.html";
 partials["search"] = "/views/search.html";
-
 
 app.get('#/about', (context: Sammy.EventContext) => {
     context.partial(partials["about"], (context: Sammy.EventContext) => {
