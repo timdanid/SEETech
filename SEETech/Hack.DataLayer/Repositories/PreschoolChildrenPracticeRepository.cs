@@ -8,9 +8,9 @@ using Hack.DataLayer.Entities;
 
 namespace Hack.DataLayer.Repositories
 {
-    public class GeneralPracticeRepository : Repository<GeneralPractice>
+    public class PreschoolChildrenPracticeRepository : Repository<PreschoolChildrenPractice>
     {
-        public GeneralPracticeRepository()
+        public PreschoolChildrenPracticeRepository()
             : base(Connection.ConnectionString)
         {
         }

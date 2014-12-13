@@ -17,7 +17,7 @@ namespace Hack.DataParser
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Reading files...")
+            Console.WriteLine("Reading files...");
 
             string[] opca = System.IO.File.ReadAllLines(@"C:\Hackaton\opca.csv");
             string[] predskolska = System.IO.File.ReadAllLines(@"C:\Hackaton\predskolska.csv");
@@ -33,7 +33,7 @@ namespace Hack.DataParser
             string[] count_zene = System.IO.File.ReadAllLines(@"C:\Hackaton\count_zene.csv");
             string[] count_zubari = System.IO.File.ReadAllLines(@"C:\Hackaton\count_zubari.csv");
 
-            //GeneralPracticeRepository repository = new GeneralPracticeRepository();
+            GeneralPracticeRepository opcaRepository = new GeneralPracticeRepository();
 
             Console.WriteLine("Adding opca...");
 
