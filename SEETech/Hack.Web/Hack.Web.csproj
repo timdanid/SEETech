@@ -54,6 +54,7 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="scripts\source\ts\main.ts" />
+    <TypeScriptCompile Include="scripts\source\ts\router.ts" />
     <TypeScriptCompile Include="scripts\typing\jquery\jquery.d.ts" />
     <TypeScriptCompile Include="scripts\typing\knockout.mapping\knockout.mapping.d.ts" />
     <TypeScriptCompile Include="scripts\typing\knockout\knockout.d.ts" />
