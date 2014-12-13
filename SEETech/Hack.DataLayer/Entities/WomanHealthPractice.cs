@@ -11,7 +11,7 @@ namespace Hack.DataLayer.Entities
         public bool SickLeaveRate { get; set; }
         public bool MedicationPrescription { get; set; }
         public bool ReferToPrimaryLaboratory { get; set; }
-        public bool OlderWomenWithTSVExamination { get; set; }
+        public bool OlderWomenWithTVSExamination { get; set; }
         public bool YoungerWomenContraceptionCouncil { get; set; }
         public bool TakingSamplesForPrimaryLabAnalysis { get; set; }
         public bool TakingAndDeliveryOfSamplesForMicrobiologyDiagnostics { get; set; }
