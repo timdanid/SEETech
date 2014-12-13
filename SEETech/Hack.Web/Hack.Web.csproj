@@ -22,7 +22,6 @@
     <Content Include="css\vendor\bootcards-android.min.css" />
     <Content Include="css\vendor\bootstrap-theme.min.css" />
     <Content Include="css\vendor\bootstrap.min.css" />
-    <Content Include="main.html" />
     <Content Include="index.html" />
     <Content Include="views\about.html" />
     <Content Include="views\info.html" />
@@ -46,6 +45,7 @@
     <Content Include="views\map.html" />
     <Content Include="views\detail.html" />
     <Content Include="views\search.html" />
+    <Content Include="views\start.html" />
     <Content Include="web.config" />
   </ItemGroup>
   <ItemGroup>

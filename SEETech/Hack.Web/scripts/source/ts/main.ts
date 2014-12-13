@@ -16,42 +16,63 @@ partials["info"] = "/views/info.html";
 partials["list"] = "/views/list.html";
 partials["map"] = "/views/map.html";
 partials["search"] = "/views/search.html";
+partials["start"] = "/views/start.html";
 
-app.get('#/about/', (context: Sammy.EventContext) => {
+app.get("/#/", (context: Sammy.EventContext) => {
+    $("#navigation").css("display", "none");
+    context.partial(partials["start"], (context: Sammy.EventContext) => {
+    });
+});
+
+app.get('/#/about/', (context: Sammy.EventContext) => {
+    $("#navigation").css("display", "block");
+    console.log("about", context.params);
     Bootcards.OffCanvas.hide();
     context.partial(partials["about"], (context: Sammy.EventContext) => {
     });
 });
-app.get('#/info/', (context: Sammy.EventContext) => {
+app.get('/#/info/', (context: Sammy.EventContext) => {
+    $("#navigation").css("display", "block");
+    console.log("info", context.params);
     Bootcards.OffCanvas.hide();
     context.partial(partials["info"], (context: Sammy.RenderContext) => {
     });
 });
 
 
-app.get('#/map/', (context: Sammy.EventContext) => {
+app.get('/#/map/', (context: Sammy.EventContext) => {
+    $("#navigation").css("display", "block");
+    console.log("map", context.params);
     Bootcards.OffCanvas.hide();
     context.partial(partials["map"], (render: Sammy.RenderContext) => {
     });
 });
 
-app.get('#/search/', (context: Sammy.EventContext) => {
+app.get('/#/search/', (context: Sammy.EventContext) => {
+    $("#navigation").css("display", "block");
+    console.log("search", context.params);
     Bootcards.OffCanvas.hide();
     context.partial(partials["search"], (render: Sammy.RenderContext) => {
+        if (ko.dataFor($("#search")[0]) != null) ko.cleanNode($("#search")[0]);
         router.getProvinces((provinces: Array<Hack.Province>) => {
             viewmodel = new Hack.SearchViewModel(provinces);
         });
 
-        ko.applyBindings(viewmodel, $("#container")[0]);
+        ko.applyBindings(viewmodel, $("#search")[0]);
     });
 });
-app.get('#/list/:json/', (context: Sammy.EventContext) => {
+app.get('/#/list/:json/', (context: Sammy.EventContext) => {
+    $("#navigation").css("display", "block");
+    console.log("list", context.params);
     Bootcards.OffCanvas.hide();
+    console.log(context.params.json);
     context.partial(partials["list"], (render: Sammy.RenderContext) => {
        
     });
 });
-app.get('#/detail/:id/', (context: Sammy.EventContext) => {
+app.get('/#/detail/:id/', (context: Sammy.EventContext) => {
+    $("#navigation").css("display", "block");
+    console.log("detail", context.params);
     Bootcards.OffCanvas.hide();
     context.partial(partials["list"], (render: Sammy.RenderContext) => {
     });
@@ -60,4 +81,4 @@ app.get('#/detail/:id/', (context: Sammy.EventContext) => {
 
 
 
-app.run('#/');
+app.run('/#/');
