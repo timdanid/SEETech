@@ -1,0 +1,440 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="hackModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Cities">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="County" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Country" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="POBox" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DoctorStatuses">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Practices">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RUPS" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="PracticeCode" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="PracticeName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="PracticeTypeID" Type="int" Nullable="false" />
+          <Property Name="DoctorStatusID" Type="int" Nullable="false" />
+          <Property Name="Address" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="CityID" Type="int" Nullable="false" />
+          <Property Name="BusinessArea" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="PracticeTypeDescription" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="POBox" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="OfficePhone" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ContactPhone" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="WorkingHours" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="CoordinateX" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="CoordinateY" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="NumberOfPatients" Type="int" Nullable="false" />
+          <Property Name="ReferToSpecialistHealthCare" Type="bit" Nullable="false" />
+          <Property Name="PeerGroup" Type="bit" Nullable="false" />
+          <Property Name="PreventivePrograms" Type="bit" Nullable="false" />
+          <Property Name="GroupPracticeOnlyForDoctorsInConcession" Type="bit" Nullable="false" />
+          <Property Name="CouncilOnlyForEmployees" Type="bit" Nullable="false" />
+          <Property Name="Council" Type="bit" Nullable="false" />
+          <Property Name="EHealth" Type="bit" Nullable="false" />
+          <Property Name="SchedulingPatients" Type="bit" Nullable="false" />
+          <Property Name="SickLeaveRate" Type="bit" />
+          <Property Name="MedicationPrescription" Type="bit" />
+          <Property Name="ReferToPrimaryLaboratory" Type="bit" />
+          <Property Name="CronicDiseasePanel" Type="bit" />
+          <Property Name="SamplesForPrimaryLabAnalysis" Type="bit" />
+          <Property Name="TelephoneConsultation" Type="bit" />
+          <Property Name="PercentageOfFirstSystematicExaminationBefore2MonthsOfLife" Type="bit" />
+          <Property Name="FeedingPanelTracking" Type="bit" />
+          <Property Name="TakingSamplesForPrimaryLabAnalysis" Type="bit" />
+          <Property Name="EmergencyPhone" Type="bit" />
+          <Property Name="OlderWomenWithTVSExamination" Type="bit" />
+          <Property Name="YoungerWomenContraceptionCouncil" Type="bit" />
+          <Property Name="TakingAndDeliveryOfSamplesForMicrobiologyDiagnostics" Type="bit" />
+          <Property Name="PortionOfPreventiveProcedures" Type="bit" />
+          <Property Name="PersonsWithDentalStatus" Type="bit" />
+          <Property Name="SpecialNeedsDentalCare" Type="bit" />
+        </EntityType>
+        <EntityType Name="PracticeTypes">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PracticeTypeThresholds">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PracticeTypeID" Type="int" Nullable="false" />
+          <Property Name="Minimum" Type="int" Nullable="false" />
+          <Property Name="Average" Type="int" Nullable="false" />
+          <Property Name="Maximum" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Practices_Cities">
+          <End Role="Cities" Type="Self.Cities" Multiplicity="1" />
+          <End Role="Practices" Type="Self.Practices" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cities">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Practices">
+              <PropertyRef Name="CityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Practices_DoctorStatuses">
+          <End Role="DoctorStatuses" Type="Self.DoctorStatuses" Multiplicity="1" />
+          <End Role="Practices" Type="Self.Practices" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DoctorStatuses">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Practices">
+              <PropertyRef Name="DoctorStatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Practices_PracticeTypes">
+          <End Role="PracticeTypes" Type="Self.PracticeTypes" Multiplicity="1" />
+          <End Role="Practices" Type="Self.Practices" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PracticeTypes">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Practices">
+              <PropertyRef Name="PracticeTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PracticeTypeThresholds_PracticeTypes">
+          <End Role="PracticeTypes" Type="Self.PracticeTypes" Multiplicity="1" />
+          <End Role="PracticeTypeThresholds" Type="Self.PracticeTypeThresholds" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PracticeTypes">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PracticeTypeThresholds">
+              <PropertyRef Name="PracticeTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="hackModelStoreContainer">
+          <EntitySet Name="Cities" EntityType="Self.Cities" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DoctorStatuses" EntityType="Self.DoctorStatuses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Practices" EntityType="Self.Practices" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PracticeTypes" EntityType="Self.PracticeTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PracticeTypeThresholds" EntityType="Self.PracticeTypeThresholds" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Practices_Cities" Association="Self.FK_Practices_Cities">
+            <End Role="Cities" EntitySet="Cities" />
+            <End Role="Practices" EntitySet="Practices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Practices_DoctorStatuses" Association="Self.FK_Practices_DoctorStatuses">
+            <End Role="DoctorStatuses" EntitySet="DoctorStatuses" />
+            <End Role="Practices" EntitySet="Practices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Practices_PracticeTypes" Association="Self.FK_Practices_PracticeTypes">
+            <End Role="PracticeTypes" EntitySet="PracticeTypes" />
+            <End Role="Practices" EntitySet="Practices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PracticeTypeThresholds_PracticeTypes" Association="Self.FK_PracticeTypeThresholds_PracticeTypes">
+            <End Role="PracticeTypes" EntitySet="PracticeTypes" />
+            <End Role="PracticeTypeThresholds" EntitySet="PracticeTypeThresholds" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="hackModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="City">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="County" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Country" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="POBox" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Practices" Relationship="Self.FK_Practices_Cities" FromRole="Cities" ToRole="Practices" />
+        </EntityType>
+        <EntityType Name="DoctorStatus">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Practices" Relationship="Self.FK_Practices_DoctorStatuses" FromRole="DoctorStatuses" ToRole="Practices" />
+        </EntityType>
+        <EntityType Name="Practice">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RUPS" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PracticeCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PracticeName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PracticeTypeID" Type="Int32" Nullable="false" />
+          <Property Name="DoctorStatusID" Type="Int32" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CityID" Type="Int32" Nullable="false" />
+          <Property Name="BusinessArea" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PracticeTypeDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="POBox" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="OfficePhone" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ContactPhone" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="WorkingHours" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CoordinateX" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CoordinateY" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="NumberOfPatients" Type="Int32" Nullable="false" />
+          <Property Name="ReferToSpecialistHealthCare" Type="Boolean" Nullable="false" />
+          <Property Name="PeerGroup" Type="Boolean" Nullable="false" />
+          <Property Name="PreventivePrograms" Type="Boolean" Nullable="false" />
+          <Property Name="GroupPracticeOnlyForDoctorsInConcession" Type="Boolean" Nullable="false" />
+          <Property Name="CouncilOnlyForEmployees" Type="Boolean" Nullable="false" />
+          <Property Name="Council" Type="Boolean" Nullable="false" />
+          <Property Name="EHealth" Type="Boolean" Nullable="false" />
+          <Property Name="SchedulingPatients" Type="Boolean" Nullable="false" />
+          <Property Name="SickLeaveRate" Type="Boolean" />
+          <Property Name="MedicationPrescription" Type="Boolean" />
+          <Property Name="ReferToPrimaryLaboratory" Type="Boolean" />
+          <Property Name="CronicDiseasePanel" Type="Boolean" />
+          <Property Name="SamplesForPrimaryLabAnalysis" Type="Boolean" />
+          <Property Name="TelephoneConsultation" Type="Boolean" />
+          <Property Name="PercentageOfFirstSystematicExaminationBefore2MonthsOfLife" Type="Boolean" />
+          <Property Name="FeedingPanelTracking" Type="Boolean" />
+          <Property Name="TakingSamplesForPrimaryLabAnalysis" Type="Boolean" />
+          <Property Name="EmergencyPhone" Type="Boolean" />
+          <Property Name="OlderWomenWithTVSExamination" Type="Boolean" />
+          <Property Name="YoungerWomenContraceptionCouncil" Type="Boolean" />
+          <Property Name="TakingAndDeliveryOfSamplesForMicrobiologyDiagnostics" Type="Boolean" />
+          <Property Name="PortionOfPreventiveProcedures" Type="Boolean" />
+          <Property Name="PersonsWithDentalStatus" Type="Boolean" />
+          <Property Name="SpecialNeedsDentalCare" Type="Boolean" />
+          <NavigationProperty Name="City" Relationship="Self.FK_Practices_Cities" FromRole="Practices" ToRole="Cities" />
+          <NavigationProperty Name="DoctorStatus" Relationship="Self.FK_Practices_DoctorStatuses" FromRole="Practices" ToRole="DoctorStatuses" />
+          <NavigationProperty Name="PracticeType" Relationship="Self.FK_Practices_PracticeTypes" FromRole="Practices" ToRole="PracticeTypes" />
+        </EntityType>
+        <EntityType Name="PracticeType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Practices" Relationship="Self.FK_Practices_PracticeTypes" FromRole="PracticeTypes" ToRole="Practices" />
+          <NavigationProperty Name="PracticeTypeThresholds" Relationship="Self.FK_PracticeTypeThresholds_PracticeTypes" FromRole="PracticeTypes" ToRole="PracticeTypeThresholds" />
+        </EntityType>
+        <EntityType Name="PracticeTypeThreshold">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PracticeTypeID" Type="Int32" Nullable="false" />
+          <Property Name="Minimum" Type="Int32" Nullable="false" />
+          <Property Name="Average" Type="Int32" Nullable="false" />
+          <Property Name="Maximum" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="PracticeType" Relationship="Self.FK_PracticeTypeThresholds_PracticeTypes" FromRole="PracticeTypeThresholds" ToRole="PracticeTypes" />
+        </EntityType>
+        <Association Name="FK_Practices_Cities">
+          <End Role="Cities" Type="Self.City" Multiplicity="1" />
+          <End Role="Practices" Type="Self.Practice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cities">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Practices">
+              <PropertyRef Name="CityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Practices_DoctorStatuses">
+          <End Role="DoctorStatuses" Type="Self.DoctorStatus" Multiplicity="1" />
+          <End Role="Practices" Type="Self.Practice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DoctorStatuses">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Practices">
+              <PropertyRef Name="DoctorStatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Practices_PracticeTypes">
+          <End Role="PracticeTypes" Type="Self.PracticeType" Multiplicity="1" />
+          <End Role="Practices" Type="Self.Practice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PracticeTypes">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Practices">
+              <PropertyRef Name="PracticeTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PracticeTypeThresholds_PracticeTypes">
+          <End Role="PracticeTypes" Type="Self.PracticeType" Multiplicity="1" />
+          <End Role="PracticeTypeThresholds" Type="Self.PracticeTypeThreshold" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PracticeTypes">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PracticeTypeThresholds">
+              <PropertyRef Name="PracticeTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="HackEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Cities" EntityType="Self.City" />
+          <EntitySet Name="DoctorStatuses" EntityType="Self.DoctorStatus" />
+          <EntitySet Name="Practices" EntityType="Self.Practice" />
+          <EntitySet Name="PracticeTypes" EntityType="Self.PracticeType" />
+          <EntitySet Name="PracticeTypeThresholds" EntityType="Self.PracticeTypeThreshold" />
+          <AssociationSet Name="FK_Practices_Cities" Association="Self.FK_Practices_Cities">
+            <End Role="Cities" EntitySet="Cities" />
+            <End Role="Practices" EntitySet="Practices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Practices_DoctorStatuses" Association="Self.FK_Practices_DoctorStatuses">
+            <End Role="DoctorStatuses" EntitySet="DoctorStatuses" />
+            <End Role="Practices" EntitySet="Practices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Practices_PracticeTypes" Association="Self.FK_Practices_PracticeTypes">
+            <End Role="PracticeTypes" EntitySet="PracticeTypes" />
+            <End Role="Practices" EntitySet="Practices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PracticeTypeThresholds_PracticeTypes" Association="Self.FK_PracticeTypeThresholds_PracticeTypes">
+            <End Role="PracticeTypes" EntitySet="PracticeTypes" />
+            <End Role="PracticeTypeThresholds" EntitySet="PracticeTypeThresholds" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="hackModelStoreContainer" CdmEntityContainer="HackEntities">
+          <EntitySetMapping Name="Cities">
+            <EntityTypeMapping TypeName="hackModel.City">
+              <MappingFragment StoreEntitySet="Cities">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="County" ColumnName="County" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="POBox" ColumnName="POBox" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DoctorStatuses">
+            <EntityTypeMapping TypeName="hackModel.DoctorStatus">
+              <MappingFragment StoreEntitySet="DoctorStatuses">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Practices">
+            <EntityTypeMapping TypeName="hackModel.Practice">
+              <MappingFragment StoreEntitySet="Practices">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="RUPS" ColumnName="RUPS" />
+                <ScalarProperty Name="PracticeCode" ColumnName="PracticeCode" />
+                <ScalarProperty Name="PracticeName" ColumnName="PracticeName" />
+                <ScalarProperty Name="PracticeTypeID" ColumnName="PracticeTypeID" />
+                <ScalarProperty Name="DoctorStatusID" ColumnName="DoctorStatusID" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="CityID" ColumnName="CityID" />
+                <ScalarProperty Name="BusinessArea" ColumnName="BusinessArea" />
+                <ScalarProperty Name="PracticeTypeDescription" ColumnName="PracticeTypeDescription" />
+                <ScalarProperty Name="POBox" ColumnName="POBox" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="OfficePhone" ColumnName="OfficePhone" />
+                <ScalarProperty Name="ContactPhone" ColumnName="ContactPhone" />
+                <ScalarProperty Name="WorkingHours" ColumnName="WorkingHours" />
+                <ScalarProperty Name="CoordinateX" ColumnName="CoordinateX" />
+                <ScalarProperty Name="CoordinateY" ColumnName="CoordinateY" />
+                <ScalarProperty Name="NumberOfPatients" ColumnName="NumberOfPatients" />
+                <ScalarProperty Name="ReferToSpecialistHealthCare" ColumnName="ReferToSpecialistHealthCare" />
+                <ScalarProperty Name="PeerGroup" ColumnName="PeerGroup" />
+                <ScalarProperty Name="PreventivePrograms" ColumnName="PreventivePrograms" />
+                <ScalarProperty Name="GroupPracticeOnlyForDoctorsInConcession" ColumnName="GroupPracticeOnlyForDoctorsInConcession" />
+                <ScalarProperty Name="CouncilOnlyForEmployees" ColumnName="CouncilOnlyForEmployees" />
+                <ScalarProperty Name="Council" ColumnName="Council" />
+                <ScalarProperty Name="EHealth" ColumnName="EHealth" />
+                <ScalarProperty Name="SchedulingPatients" ColumnName="SchedulingPatients" />
+                <ScalarProperty Name="SickLeaveRate" ColumnName="SickLeaveRate" />
+                <ScalarProperty Name="MedicationPrescription" ColumnName="MedicationPrescription" />
+                <ScalarProperty Name="ReferToPrimaryLaboratory" ColumnName="ReferToPrimaryLaboratory" />
+                <ScalarProperty Name="CronicDiseasePanel" ColumnName="CronicDiseasePanel" />
+                <ScalarProperty Name="SamplesForPrimaryLabAnalysis" ColumnName="SamplesForPrimaryLabAnalysis" />
+                <ScalarProperty Name="TelephoneConsultation" ColumnName="TelephoneConsultation" />
+                <ScalarProperty Name="PercentageOfFirstSystematicExaminationBefore2MonthsOfLife" ColumnName="PercentageOfFirstSystematicExaminationBefore2MonthsOfLife" />
+                <ScalarProperty Name="FeedingPanelTracking" ColumnName="FeedingPanelTracking" />
+                <ScalarProperty Name="TakingSamplesForPrimaryLabAnalysis" ColumnName="TakingSamplesForPrimaryLabAnalysis" />
+                <ScalarProperty Name="EmergencyPhone" ColumnName="EmergencyPhone" />
+                <ScalarProperty Name="OlderWomenWithTVSExamination" ColumnName="OlderWomenWithTVSExamination" />
+                <ScalarProperty Name="YoungerWomenContraceptionCouncil" ColumnName="YoungerWomenContraceptionCouncil" />
+                <ScalarProperty Name="TakingAndDeliveryOfSamplesForMicrobiologyDiagnostics" ColumnName="TakingAndDeliveryOfSamplesForMicrobiologyDiagnostics" />
+                <ScalarProperty Name="PortionOfPreventiveProcedures" ColumnName="PortionOfPreventiveProcedures" />
+                <ScalarProperty Name="PersonsWithDentalStatus" ColumnName="PersonsWithDentalStatus" />
+                <ScalarProperty Name="SpecialNeedsDentalCare" ColumnName="SpecialNeedsDentalCare" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PracticeTypes">
+            <EntityTypeMapping TypeName="hackModel.PracticeType">
+              <MappingFragment StoreEntitySet="PracticeTypes">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PracticeTypeThresholds">
+            <EntityTypeMapping TypeName="hackModel.PracticeTypeThreshold">
+              <MappingFragment StoreEntitySet="PracticeTypeThresholds">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="PracticeTypeID" ColumnName="PracticeTypeID" />
+                <ScalarProperty Name="Minimum" ColumnName="Minimum" />
+                <ScalarProperty Name="Average" ColumnName="Average" />
+                <ScalarProperty Name="Maximum" ColumnName="Maximum" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
