@@ -23,9 +23,9 @@
     <Content Include="css\vendor\bootstrap-theme.min.css" />
     <Content Include="css\vendor\bootstrap.min.css" />
     <Content Include="index.html" />
-    <Content Include="Views\AboutView.html" />
-    <Content Include="Views\InfoView.html" />
-    <Content Include="Views\ListView.html" />
+    <Content Include="views\about.html" />
+    <Content Include="views\info.html" />
+    <Content Include="views\list.html" />
     <Content Include="scripts\index.js" />
     <Content Include="scripts\source\alert.js" />
     <Content Include="scripts\source\button.js" />
@@ -42,9 +42,9 @@
     <Content Include="scripts\vendor\knockout.js" />
     <Content Include="scripts\vendor\knockout.mapping.js" />
     <Content Include="scripts\vendor\sammy.js" />
-    <Content Include="Views\MapView.html" />
-    <Content Include="Views\SearchResultView.html" />
-    <Content Include="Views\SearchView.html" />
+    <Content Include="views\map.html" />
+    <Content Include="views\detail.html" />
+    <Content Include="views\search.html" />
     <Content Include="web.config" />
   </ItemGroup>
   <ItemGroup>
