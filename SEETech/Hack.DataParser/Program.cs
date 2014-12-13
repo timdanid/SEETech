@@ -33,11 +33,10 @@ namespace Hack.DataParser
             string[] count_zene = System.IO.File.ReadAllLines(@"C:\Hackaton\count_zene.csv");
             string[] count_zubari = System.IO.File.ReadAllLines(@"C:\Hackaton\count_zubari.csv");
 
-            GeneralPracticeRepository generalPracticeRepository = new GeneralPracticeRepository();
-            PreschoolChildrenPracticeRepository preschoolChildrenPracticeRepository = new PreschoolChildrenPracticeRepository();
-            WomanHealthPracticeRepository womanHealthPracticeRepository = new WomanHealthPracticeRepository();
-            DentalPracticeRepository dentalPracticeRepository = new DentalPracticeRepository();
-            UnsignedPracticeRepositoy unsignedPracticeRepositoy = new UnsignedPracticeRepositoy();
+            Console.WriteLine("Clearing database...");
+
+            PracticeBaseRepository repository = new PracticeBaseRepository();
+            repository.DeleteAll();
 
             Console.WriteLine("Adding opca...");
 
@@ -69,7 +68,7 @@ namespace Hack.DataParser
                 SetLocationProperties(practice, novo, koordinate);
                 SetCountProperties(practice, count_opca, 1275, 1700, 2125);
 
-                generalPracticeRepository.Add(practice);
+                repository.Add(practice);
             }
 
             Console.WriteLine("Adding predskolska...");
@@ -102,7 +101,7 @@ namespace Hack.DataParser
                 SetLocationProperties(practice, novo, koordinate);
                 SetCountProperties(practice, count_predskolska, 715, 950, 1190);
 
-                preschoolChildrenPracticeRepository.Add(practice);
+                repository.Add(practice);
             }
 
             Console.WriteLine("Adding zene...");
@@ -136,7 +135,7 @@ namespace Hack.DataParser
                 SetLocationProperties(practice, novo, koordinate);
                 SetCountProperties(practice, count_zene, 4500, 6000, 9000);
 
-                womanHealthPracticeRepository.Add(practice);
+                repository.Add(practice);
             }
 
             Console.WriteLine("Adding zubari...");
@@ -167,7 +166,7 @@ namespace Hack.DataParser
                 SetLocationProperties(practice, novo, koordinate);
                 SetCountProperties(practice, count_zubari, 1425, 1900, 2375);
 
-                dentalPracticeRepository.Add(practice);
+                repository.Add(practice);
             }
 
             Console.WriteLine("Adding nepotpisnici...");
@@ -185,7 +184,7 @@ namespace Hack.DataParser
 
                 SetLocationProperties(practice, novo, koordinate);
 
-                unsignedPracticeRepositoy.Add(practice);
+                repository.Add(practice);
             }
 
             Console.WriteLine("Done.");
