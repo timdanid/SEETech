@@ -17,8 +17,9 @@ namespace Hack.DataLayer.Entities
 
         // dodatne mogucnosti
         public bool PreventivePrograms { get; set; }
-        public bool PracticeOnlyForDoctorsInConcession { get; set; }
+        public bool GroupPracticeOnlyForDoctorsInConcession { get; set; }
         public bool CouncilOnlyForEmployees { get; set; }
+        public bool Council { get; set; }
         public bool EHealth { get; set; }
         public bool SchedulingPatients { get; set; }
     }
