@@ -1,15 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
-using Hack.DataLayer.Entities;
-using MongoDB.Bson;
-using MongoDB.Driver;
-using MongoDB.Driver.Builders;
-using MongoDB.Driver.Linq;
-using Hack.DataLayer.Repositories;
+using Hack.DataLayer;
 
 namespace Hack.DataParser
 {
@@ -33,165 +27,193 @@ namespace Hack.DataParser
             string[] count_zene = System.IO.File.ReadAllLines(@"C:\Hackaton\count_zene.csv");
             string[] count_zubari = System.IO.File.ReadAllLines(@"C:\Hackaton\count_zubari.csv");
 
-            Console.WriteLine("Clearing database...");
-
-            PracticeBaseRepository repository = new PracticeBaseRepository();
-            repository.DeleteAll();
-
-            Console.WriteLine("Adding opca...");
-
-            foreach (string line in opca)
+            using (HackEntities entities = new HackEntities())
             {
-                var values = line.Split(';');
-                GeneralPractice practice = new GeneralPractice();
-                practice.RUPS = values[0].Trim();
-                practice.PracticeCode = values[1].Trim();
-                //practice.PracticeName = values[2].Trim();
-                practice.DoctorStatus = values[3].Trim().ToLower() == "dz" ? DoctorStatusEnum.DZ : DoctorStatusEnum.KONC;
-                practice.Address = values[4].Trim();
-                practice.City = values[5].Trim();
-                practice.SickLeaveRate = values[6].Trim().ToLower() == "da";
-                practice.MedicationPrescription = values[7].Trim().ToLower() == "da";
-                practice.ReferToSpecialistHealthCare = values[8].Trim().ToLower() == "da";
-                practice.ReferToPrimaryLaboratory = values[9].Trim().ToLower() == "da";
-                practice.CronicDiseasePanel = values[10].Trim().ToLower() == "da";
-                practice.PeerGroup = values[11].Trim().ToLower() == "da";
-                practice.PreventivePrograms = values[12].Trim().ToLower() == "da";
-                practice.GroupPracticeOnlyForDoctorsInConcession = values[13].Trim().ToLower() == "da";
-                practice.CouncilOnlyForEmployees = values[14].Trim().ToLower() == "da";
-                practice.Council = values[15].Trim().ToLower() == "da";
-                practice.EHealth = values[16].Trim().ToLower() == "da";
-                practice.SchedulingPatients = values[17].Trim().ToLower() == "da";
-                practice.SamplesForPrimaryLabAnalysis = values[18].Trim().ToLower() == "da";
-                practice.TelephoneConsultation = values[19].Trim().ToLower() == "da";
+                Console.WriteLine("Adding opca...");
 
-                SetLocationProperties(practice, novo, koordinate);
-                SetCountProperties(practice, count_opca, 1275, 1700, 2125);
+                foreach (string line in opca)
+                {
+                    var values = line.Split(';');
 
-                repository.Add(practice);
-            }
+                    Practice practice = new Practice();
+                    practice.RUPS = values[0].Trim();
+                    practice.PracticeCode = values[1].Trim();
+                    //practice.PracticeName = values[2].Trim();
+                    practice.DoctorStatus = GetDoctorStatus(entities, values[3].Trim().ToLower());
+                    practice.Address = values[4].Trim();
+                    practice.City = EnsureCity(entities, values[5].Trim());
+                    practice.SickLeaveRate = values[6].Trim().ToLower() == "da";
+                    practice.MedicationPrescription = values[7].Trim().ToLower() == "da";
+                    practice.ReferToSpecialistHealthCare = values[8].Trim().ToLower() == "da";
+                    practice.ReferToPrimaryLaboratory = values[9].Trim().ToLower() == "da";
+                    practice.CronicDiseasePanel = values[10].Trim().ToLower() == "da";
+                    practice.PeerGroup = values[11].Trim().ToLower() == "da";
+                    practice.PreventivePrograms = values[12].Trim().ToLower() == "da";
+                    practice.GroupPracticeOnlyForDoctorsInConcession = values[13].Trim().ToLower() == "da";
+                    practice.CouncilOnlyForEmployees = values[14].Trim().ToLower() == "da";
+                    practice.Council = values[15].Trim().ToLower() == "da";
+                    practice.EHealth = values[16].Trim().ToLower() == "da";
+                    practice.SchedulingPatients = values[17].Trim().ToLower() == "da";
+                    practice.SamplesForPrimaryLabAnalysis = values[18].Trim().ToLower() == "da";
+                    practice.TelephoneConsultation = values[19].Trim().ToLower() == "da";
 
-            Console.WriteLine("Adding predskolska...");
+                    SetLocationProperties(practice, novo, koordinate);
+                    SetCountProperties(practice, count_opca);
 
-            foreach (string line in predskolska)
-            {
-                var values = line.Split(';');
-                PreschoolChildrenPractice practice = new PreschoolChildrenPractice();
-                practice.RUPS = values[0].Trim();
-                practice.PracticeCode = values[1].Trim();
-                //practice.PracticeName = values[2].Trim();
-                practice.DoctorStatus = values[3].Trim().ToLower() == "dz" ? DoctorStatusEnum.DZ : DoctorStatusEnum.KONC;
-                practice.Address = values[4].Trim();
-                practice.City = values[5].Trim();
-                practice.MedicationPrescription = values[6].Trim().ToLower() == "da";
-                practice.ReferToSpecialistHealthCare = values[7].Trim().ToLower() == "da";
-                practice.ReferToPrimaryLaboratory = values[8].Trim().ToLower() == "da";
-                practice.PercentageOfFirstSystematicExaminationBefore2MonthsOfLife = values[9].Trim().ToLower() == "da";
-                practice.FeedingPanelTracking = values[10].Trim().ToLower() == "da";
-                practice.PeerGroup = values[11].Trim().ToLower() == "da";
-                practice.PreventivePrograms = values[12].Trim().ToLower() == "da";
-                practice.GroupPracticeOnlyForDoctorsInConcession = values[13].Trim().ToLower() == "da";
-                practice.CouncilOnlyForEmployees = values[14].Trim().ToLower() == "da";
-                practice.Council = values[15].Trim().ToLower() == "da";
-                practice.EHealth = values[16].Trim().ToLower() == "da";
-                practice.SchedulingPatients = values[17].Trim().ToLower() == "da";
-                practice.TakingSamplesForPrimaryLabAnalysis = values[18].Trim().ToLower() == "da";
-                practice.EmergencyPhone = values[19].Trim().ToLower() == "da";
+                    entities.Practices.Add(practice);
+                }
 
-                SetLocationProperties(practice, novo, koordinate);
-                SetCountProperties(practice, count_predskolska, 715, 950, 1190);
+                entities.SaveChanges();
+                Console.WriteLine("Adding predskolska...");
 
-                repository.Add(practice);
-            }
+                foreach (string line in predskolska)
+                {
+                    var values = line.Split(';');
+                    Practice practice = new Practice();
+                    practice.RUPS = values[0].Trim();
+                    practice.PracticeCode = values[1].Trim();
+                    //practice.PracticeName = values[2].Trim();
+                    practice.DoctorStatus = GetDoctorStatus(entities, values[3].Trim().ToLower());
+                    practice.Address = values[4].Trim();
+                    practice.City = practice.City = EnsureCity(entities, values[5].Trim());
+                    practice.MedicationPrescription = values[6].Trim().ToLower() == "da";
+                    practice.ReferToSpecialistHealthCare = values[7].Trim().ToLower() == "da";
+                    practice.ReferToPrimaryLaboratory = values[8].Trim().ToLower() == "da";
+                    practice.PercentageOfFirstSystematicExaminationBefore2MonthsOfLife = values[9].Trim().ToLower() ==
+                                                                                         "da";
+                    practice.FeedingPanelTracking = values[10].Trim().ToLower() == "da";
+                    practice.PeerGroup = values[11].Trim().ToLower() == "da";
+                    practice.PreventivePrograms = values[12].Trim().ToLower() == "da";
+                    practice.GroupPracticeOnlyForDoctorsInConcession = values[13].Trim().ToLower() == "da";
+                    practice.CouncilOnlyForEmployees = values[14].Trim().ToLower() == "da";
+                    practice.Council = values[15].Trim().ToLower() == "da";
+                    practice.EHealth = values[16].Trim().ToLower() == "da";
+                    practice.SchedulingPatients = values[17].Trim().ToLower() == "da";
+                    practice.TakingSamplesForPrimaryLabAnalysis = values[18].Trim().ToLower() == "da";
+                    practice.EmergencyPhone = values[19].Trim().ToLower() == "da";
 
-            Console.WriteLine("Adding zene...");
+                    SetLocationProperties(practice, novo, koordinate);
+                    SetCountProperties(practice, count_predskolska);
 
-            foreach (string line in zene)
-            {
-                var values = line.Split(';');
-                WomanHealthPractice practice = new WomanHealthPractice();
-                practice.RUPS = values[0].Trim();
-                practice.PracticeCode = values[1].Trim();
-                //practice.PracticeName = values[2].Trim();
-                practice.DoctorStatus = values[3].Trim().ToLower() == "dz" ? DoctorStatusEnum.DZ : DoctorStatusEnum.KONC;
-                practice.Address = values[4].Trim();
-                practice.City = values[5].Trim();
-                practice.SickLeaveRate = values[6].Trim().ToLower() == "da";
-                practice.MedicationPrescription = values[7].Trim().ToLower() == "da";
-                practice.ReferToSpecialistHealthCare = values[8].Trim().ToLower() == "da";
-                practice.ReferToPrimaryLaboratory = values[9].Trim().ToLower() == "da";
-                practice.OlderWomenWithTVSExamination = values[10].Trim().ToLower() == "da";
-                practice.YoungerWomenContraceptionCouncil = values[11].Trim().ToLower() == "da";
-                practice.PeerGroup = values[12].Trim().ToLower() == "da";
-                practice.PreventivePrograms = values[13].Trim().ToLower() == "da";
-                practice.GroupPracticeOnlyForDoctorsInConcession = values[14].Trim().ToLower() == "da";
-                practice.CouncilOnlyForEmployees = values[15].Trim().ToLower() == "da";
-                practice.Council = values[16].Trim().ToLower() == "da";
-                practice.EHealth = values[17].Trim().ToLower() == "da";
-                practice.SchedulingPatients = values[18].Trim().ToLower() == "da";
-                practice.TakingSamplesForPrimaryLabAnalysis = values[19].Trim().ToLower() == "da";
-                practice.TakingAndDeliveryOfSamplesForMicrobiologyDiagnostics = values[20].Trim().ToLower() == "da";
+                    entities.Practices.Add(practice);
+                }
 
-                SetLocationProperties(practice, novo, koordinate);
-                SetCountProperties(practice, count_zene, 4500, 6000, 9000);
+                entities.SaveChanges();
+                Console.WriteLine("Adding zene...");
 
-                repository.Add(practice);
-            }
+                foreach (string line in zene)
+                {
+                    var values = line.Split(';');
+                    Practice practice = new Practice();
+                    practice.RUPS = values[0].Trim();
+                    practice.PracticeCode = values[1].Trim();
+                    //practice.PracticeName = values[2].Trim();
+                    practice.DoctorStatus = GetDoctorStatus(entities, values[3].Trim().ToLower());
+                    practice.Address = values[4].Trim();
+                    practice.City = EnsureCity(entities, values[5].Trim());
+                    practice.SickLeaveRate = values[6].Trim().ToLower() == "da";
+                    practice.MedicationPrescription = values[7].Trim().ToLower() == "da";
+                    practice.ReferToSpecialistHealthCare = values[8].Trim().ToLower() == "da";
+                    practice.ReferToPrimaryLaboratory = values[9].Trim().ToLower() == "da";
+                    practice.OlderWomenWithTVSExamination = values[10].Trim().ToLower() == "da";
+                    practice.YoungerWomenContraceptionCouncil = values[11].Trim().ToLower() == "da";
+                    practice.PeerGroup = values[12].Trim().ToLower() == "da";
+                    practice.PreventivePrograms = values[13].Trim().ToLower() == "da";
+                    practice.GroupPracticeOnlyForDoctorsInConcession = values[14].Trim().ToLower() == "da";
+                    practice.CouncilOnlyForEmployees = values[15].Trim().ToLower() == "da";
+                    practice.Council = values[16].Trim().ToLower() == "da";
+                    practice.EHealth = values[17].Trim().ToLower() == "da";
+                    practice.SchedulingPatients = values[18].Trim().ToLower() == "da";
+                    practice.TakingSamplesForPrimaryLabAnalysis = values[19].Trim().ToLower() == "da";
+                    practice.TakingAndDeliveryOfSamplesForMicrobiologyDiagnostics = values[20].Trim().ToLower() == "da";
 
-            Console.WriteLine("Adding zubari...");
+                    SetLocationProperties(practice, novo, koordinate);
+                    SetCountProperties(practice, count_zene);
 
-            foreach (string line in zubari)
-            {
-                var values = line.Split(';');
-                DentalPractice practice = new DentalPractice();
-                practice.RUPS = values[0].Trim();
-                practice.PracticeCode = values[1].Trim();
-                //practice.PracticeName = values[2].Trim();
-                practice.DoctorStatus = values[3].Trim().ToLower() == "dz" ? DoctorStatusEnum.DZ : DoctorStatusEnum.KONC;
-                practice.Address = values[4].Trim();
-                practice.City = values[5].Trim();
-                practice.ReferToSpecialistHealthCare = values[6].Trim().ToLower() == "da";
-                practice.PortionOfPreventiveProcedures = values[7].Trim().ToLower() == "da";
-                practice.PersonsWithDentalStatus = values[8].Trim().ToLower() == "da";
-                practice.PeerGroup = values[9].Trim().ToLower() == "da";
-                practice.PreventivePrograms = values[10].Trim().ToLower() == "da";
-                practice.GroupPracticeOnlyForDoctorsInConcession = values[11].Trim().ToLower() == "da";
-                practice.CouncilOnlyForEmployees = values[12].Trim().ToLower() == "da";
-                practice.Council = values[13].Trim().ToLower() == "da";
-                practice.EHealth = values[14].Trim().ToLower() == "da";
-                practice.SchedulingPatients = values[15].Trim().ToLower() == "da";
-                practice.EmergencyPhone = values[16].Trim().ToLower() == "da";
-                practice.SpecialNeedsDentalCare = values[17].Trim().ToLower() == "da";
+                    entities.Practices.Add(practice);
+                }
 
-                SetLocationProperties(practice, novo, koordinate);
-                SetCountProperties(practice, count_zubari, 1425, 1900, 2375);
+                entities.SaveChanges();
+                Console.WriteLine("Adding zubari...");
 
-                repository.Add(practice);
-            }
+                foreach (string line in zubari)
+                {
+                    var values = line.Split(';');
+                    Practice practice = new Practice();
+                    practice.RUPS = values[0].Trim();
+                    practice.PracticeCode = values[1].Trim();
+                    //practice.PracticeName = values[2].Trim();
+                    practice.DoctorStatus = GetDoctorStatus(entities, values[3].Trim().ToLower());
+                    practice.Address = values[4].Trim();
+                    practice.City = EnsureCity(entities, values[5].Trim());
+                    practice.ReferToSpecialistHealthCare = values[6].Trim().ToLower() == "da";
+                    practice.PortionOfPreventiveProcedures = values[7].Trim().ToLower() == "da";
+                    practice.PersonsWithDentalStatus = values[8].Trim().ToLower() == "da";
+                    practice.PeerGroup = values[9].Trim().ToLower() == "da";
+                    practice.PreventivePrograms = values[10].Trim().ToLower() == "da";
+                    practice.GroupPracticeOnlyForDoctorsInConcession = values[11].Trim().ToLower() == "da";
+                    practice.CouncilOnlyForEmployees = values[12].Trim().ToLower() == "da";
+                    practice.Council = values[13].Trim().ToLower() == "da";
+                    practice.EHealth = values[14].Trim().ToLower() == "da";
+                    practice.SchedulingPatients = values[15].Trim().ToLower() == "da";
+                    practice.EmergencyPhone = values[16].Trim().ToLower() == "da";
+                    practice.SpecialNeedsDentalCare = values[17].Trim().ToLower() == "da";
 
-            Console.WriteLine("Adding nepotpisnici...");
+                    SetLocationProperties(practice, novo, koordinate);
+                    SetCountProperties(practice, count_zubari);
 
-            foreach (string line in nepotpisnici)
-            {
-                var values = line.Split(';');
-                UnsignedPractice practice = new UnsignedPractice();
-                practice.RUPS = values[0].Trim();
-                practice.PracticeCode = values[1].Trim();
-                //practice.PracticeName = values[2].Trim();
-                practice.DoctorStatus = values[3].Trim().ToLower() == "dz" ? DoctorStatusEnum.DZ : DoctorStatusEnum.KONC;
-                practice.Address = values[4].Trim();
-                practice.City = values[5].Trim();
+                    entities.Practices.Add(practice);
+                }
 
-                SetLocationProperties(practice, novo, koordinate);
+                entities.SaveChanges();
+                Console.WriteLine("Adding nepotpisnici...");
 
-                repository.Add(practice);
+                foreach (string line in nepotpisnici)
+                {
+                    var values = line.Split(';');
+                    Practice practice = new Practice();
+                    practice.RUPS = values[0].Trim();
+                    practice.PracticeCode = values[1].Trim();
+                    //practice.PracticeName = values[2].Trim();
+                    practice.DoctorStatus = GetDoctorStatus(entities, values[3].Trim().ToLower());
+                    practice.Address = values[4].Trim();
+                    practice.City = EnsureCity(entities, values[5].Trim());
+
+                    SetLocationProperties(practice, novo, koordinate);
+
+                    entities.Practices.Add(practice);
+                }
+
+                entities.SaveChanges();
             }
 
             Console.WriteLine("Done.");
 
         }
 
-        private static void SetCountProperties(PracticeBase practice, string[] counts, int minCount, int avgCount, int maxCount)
+        public static DoctorStatus GetDoctorStatus(HackEntities entities, string doctorStatus)
+        {
+            return entities.DoctorStatuses.First(x => x.Name.ToLower() == doctorStatus.ToLower());
+        }
+
+        public static City EnsureCity(HackEntities entities, string cityName)
+        {
+            City city = entities.Cities.FirstOrDefault(x => x.Name.ToLower() == cityName.ToLower());
+
+            if (city == null)
+            {
+                city = new City();
+                city.Name = cityName;
+                city.County = "";
+                city.Country = "";
+                city.POBox = "";
+            }
+
+            entities.Cities.Add(city);
+            return city;
+        }
+
+        private static void SetCountProperties(Practice practice, string[] counts)
         {
             foreach (string line in counts)
             {
@@ -202,14 +224,11 @@ namespace Hack.DataParser
                 {
                     int count = Int32.Parse(values[5].Trim());
                     practice.NumberOfPatients = count;
-                    practice.MinimumNumberOfPatients = minCount;
-                    practice.AverageNumberOfPatients = avgCount;
-                    practice.MaximumNumberOfPatients = maxCount;
                 }
             }
         }
 
-        static void SetLocationProperties(PracticeBase practice, string[] novo, string[] koordinate)
+        static void SetLocationProperties(Practice practice, string[] novo, string[] koordinate)
         {
             foreach (string line in novo)
             {
@@ -220,7 +239,7 @@ namespace Hack.DataParser
                 {
                     practice.PracticeName = values[2].Trim();
                     practice.BusinessArea = values[3].Trim();
-                    practice.PracticeTypeString = values[4].Trim();
+                    practice.PracticeTypeDescription = values[4].Trim();
                     practice.POBox = values[8].Trim();
                     practice.Email = values[10].Trim();
                     practice.OfficePhone = values[11].Trim();
@@ -236,8 +255,8 @@ namespace Hack.DataParser
 
                         if (geoid == geoid2)
                         {
-                            practice.County = values2[12].Trim();
-                            practice.Country = values2[13].Trim();
+                            practice.City.County = values2[12].Trim();
+                            practice.City.Country = values2[13].Trim();
                             practice.CoordinateX = values2[14].Trim();
                             practice.CoordinateY = values2[15].Trim();
                         }
