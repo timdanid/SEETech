@@ -51,6 +51,16 @@ module Hack {
             this.dental = ko.observable(true);
             this.woman = ko.observable(true);
             this.preschool = ko.observable(true);
+
+            this.selectedProvince.subscribe((province) => {
+                console.log(province);
+            });
+        }
+
+        
+
+        public loadCities(cities: Array<City>) {
+            this.cities(cities);
         }
     }
 }
