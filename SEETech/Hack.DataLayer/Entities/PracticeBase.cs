@@ -16,5 +16,22 @@ namespace Hack.DataLayer.Entities
         public DoctorStatusEnum DoctorStatus { get; set; }
         public string Address { get; set; }
         public string City { get; set; }
+
+        // locations.csv
+        public string BusinessArea { get; set; }
+        public string PracticeType { get; set; }
+        public string POBox { get; set; }
+        public string Email { get; set; }
+        public string OfficePhone { get; set; }
+        public string ContactPhone { get; set; }
+        public string WorkingHours { get; set; }
+        
+        // coordinates.csv
+        public string County { get; set; }
+        public string Country { get; set; }
+        public string CoordinateX { get; set; }
+        public string CoordinateY { get; set; }
+
+        // patients.csv
     }
 }
