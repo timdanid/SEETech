@@ -4,15 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{D3C268C4-A472-4592-A95D-A233A8BABB61}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <ProjectGuid>{A1A360CB-F4BD-490A-B5AA-3B18873B7491}</ProjectGuid>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Hack.DataLayer</RootNamespace>
-    <AssemblyName>Hack.DataLayer</AssemblyName>
+    <RootNamespace>Hack.DataParser</RootNamespace>
+    <AssemblyName>Hack.DataParser</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -22,6 +23,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -39,22 +41,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
-    <Compile Include="Entities\City.cs" />
-    <Compile Include="Entities\DentalPractice.cs" />
-    <Compile Include="Entities\GeneralPractice.cs" />
-    <Compile Include="Entities\Practice.cs" />
-    <Compile Include="Entities\PracticeBase.cs" />
-    <Compile Include="Entities\PreschoolChildrenPractice.cs" />
-    <Compile Include="Entities\UnsignedPractice.cs" />
-    <Compile Include="Entities\WomanHealthPractice.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositories\CitiesRepository.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\App.DataLayer\App.DataLayer.csproj">
       <Project>{05707bf2-dd6a-41b3-96f6-ef890192ef47}</Project>
       <Name>App.DataLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Hack.DataLayer\Hack.DataLayer.csproj">
+      <Project>{d3c268c4-a472-4592-a95d-a233a8babb61}</Project>
+      <Name>Hack.DataLayer</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
