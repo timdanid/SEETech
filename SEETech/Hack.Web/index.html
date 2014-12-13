@@ -36,9 +36,21 @@
     </div>
     <!-- slide in off canvas menu (mobile only) -->
     <nav class="navmenu offcanvas offcanvas-left">
-        <ul class="nav" data-bind="foreach: sidebar">
-            <li data-bind="css: { active: isActive()}">
-                <a data-bind="href: href, glyphText: {glyph: icon, text: name}"></a>
+        <ul class="nav">
+            <li>
+                <a href="#">
+                    <i class="fa fa-lg fa-dashboard"></i>Dashboard
+                </a>
+            </li>
+            <li class="active">
+                <a href="starter-template.html">
+                    <i class="fa fa-lg fa-users"></i>Contacts
+                </a>
+            </li>
+            <li>
+                <a href="az-picker.html">
+                    <i class="fa fa-lg fa-users"></i>AZ Picker
+                </a>
             </li>
         </ul>
     </nav><!--nav-->
