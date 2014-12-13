@@ -110,6 +110,13 @@
     <VisualStudioVersion>12.0</VisualStudioVersion>
   </PropertyGroup>
   <ItemGroup>
+    <Content Include="css\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="css\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="css\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="css\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="css\vendor\bootcards-android.min.css" />
+    <Content Include="css\vendor\bootstrap-theme.min.css" />
+    <Content Include="css\vendor\bootstrap.min.css" />
     <Content Include="plugins\org.apache.cordova.geolocation\.fetch.json" />
     <Content Include="plugins\org.apache.cordova.geolocation\CONTRIBUTING.md" />
     <Content Include="plugins\org.apache.cordova.geolocation\doc\de\index.md" />
@@ -443,7 +450,6 @@
     <Content Include="plugins\plugin.google.maps\src\ios\GoogleMaps\TileOverlay.h" />
     <Content Include="plugins\plugin.google.maps\src\ios\GoogleMaps\TileOverlay.m" />
     <Content Include="plugins\plugin.google.maps\www\googlemaps-cdv-plugin.js" />
-    <Content Include="scripts\main.js" />
     <Content Include="scripts\source\alert.js" />
     <Content Include="scripts\source\button.js" />
     <Content Include="scripts\source\glyph.js" />
@@ -452,13 +458,14 @@
     <Content Include="scripts\source\progress.js" />
     <Content Include="scripts\source\src.js" />
     <Content Include="scripts\source\timeAgo.js" />
+    <Content Include="scripts\vendor\bootcards.min.js" />
     <Content Include="scripts\vendor\bootstrap.min.js" />
     <Content Include="scripts\vendor\fastclick.min.js" />
     <Content Include="scripts\vendor\jquery.js" />
     <Content Include="scripts\vendor\knockout.js" />
     <Content Include="scripts\vendor\knockout.mapping.js" />
-    <Content Include="scripts\vendor\require.js" />
-    <Content Include="scripts\vendor\text.js" />
+    <Content Include="scripts\vendor\sammy.js" />
+    <Folder Include="css\source\" />
     <Folder Include="images\" />
     <Content Include="merges\android\scripts\android2.3-jscompat.js" />
     <Content Include="merges\android\scripts\platformOverrides.js" />
@@ -481,7 +488,6 @@
     </Content>
     <Content Include="index.html" />
     <Content Include="scripts\index.js" />
-    <Content Include="css\index.css" />
     <Content Include="res\icons\android\icon-36-ldpi.png" />
     <Content Include="res\icons\android\icon-48-mdpi.png" />
     <Content Include="res\icons\android\icon-72-hdpi.png" />
@@ -529,6 +535,13 @@
     <Content Include="res\screens\windows\splashscreen.png" />
     <Content Include="res\screens\windows\SplashScreen.scale-240.png" />
     <Content Include="res\screens\wp8\screen-portrait.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="scripts\source\ts\main.ts" />
+    <TypeScriptCompile Include="scripts\typing\jquery\jquery.d.ts" />
+    <TypeScriptCompile Include="scripts\typing\knockout.mapping\knockout.mapping.d.ts" />
+    <TypeScriptCompile Include="scripts\typing\knockout\knockout.d.ts" />
+    <TypeScriptCompile Include="scripts\typing\sammy\sammyjs.d.ts" />
   </ItemGroup>
   <PropertyGroup>
     <TypeScriptToolsVersion>1.0</TypeScriptToolsVersion>

@@ -1,4 +1,4 @@
-﻿define(['jquery', 'knockout'], function ($, ko) {
+﻿
     ko.bindingHandlers.button = {
         update: function (element, valueAccessor) {
             var size = ko.unwrap(valueAccessor().size);
@@ -18,4 +18,3 @@
             }
         }
     };
-});

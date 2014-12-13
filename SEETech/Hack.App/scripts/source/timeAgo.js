@@ -1,4 +1,4 @@
-﻿define(['jquery', 'knockout'], function ($, ko) {
+﻿
     function toTimeAgo(dt) {
         var secs = (((new Date()).getTime() - dt.getTime()) / 1000),
             days = Math.floor(secs / 86400);
@@ -27,4 +27,3 @@
             });
         }
     };
-});

@@ -1,4 +1,4 @@
-﻿define(['jquery', 'knockout'], function($, ko, guid) {
+﻿
     ko.bindingHandlers.progress = {
         update: function(element, valueAccessor, allBindingsAccessor, viewModel, bindingContext) {
             var $element = $(element);
@@ -16,4 +16,3 @@
 
         }
     };
-});

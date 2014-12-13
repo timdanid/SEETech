@@ -22,4 +22,14 @@
     function onResume() {
         // TODO: This application has been reactivated. Restore application state here.
     };
-} )();
+})();
+
+bootcards.init({
+    offCanvasHideOnMainClick: true,
+    enableTabletPortraitMode: true,
+    disableRubberBanding: true
+});
+
+window.addEventListener('load', function () {
+    FastClick.attach(document.body);
+}, false);

@@ -1,4 +1,4 @@
-﻿define(['jquery', 'knockout'], function ($, ko) {
+﻿
     ko.bindingHandlers.glyph = {
         update: function (element, valueAccessor) {
             var val = ko.unwrap(valueAccessor());
@@ -7,4 +7,3 @@
             $(element).attr("aria-hidden", "true");
         }
     };
-});

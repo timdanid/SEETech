@@ -1,5 +1,4 @@
-﻿//{'message': 'Here is an Error', 'priority': 'error'}
-define(['jquery', 'knockout'], function ($, ko) {
+﻿
     ko.bindingHandlers.alert = {
         update: function(element, valueAccessor, allBindingsAccessor, viewModel, bindingContext) {
             var $element = $(element);
@@ -20,4 +19,3 @@ define(['jquery', 'knockout'], function ($, ko) {
                 .append(alertMessage);
         }
     }
-});
