@@ -40,7 +40,21 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
+    <Compile Include="Entities\City.cs" />
+    <Compile Include="Entities\DentalPractice.cs" />
+    <Compile Include="Entities\GeneralPractice.cs" />
+    <Compile Include="Entities\Practice.cs" />
+    <Compile Include="Entities\PracticeBase.cs" />
+    <Compile Include="Entities\PreschoolChildrenPractice.cs" />
+    <Compile Include="Entities\UnsignedPractice.cs" />
+    <Compile Include="Entities\WomanHealthPractice.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\App.DataLayer\App.DataLayer.csproj">
+      <Project>{05707bf2-dd6a-41b3-96f6-ef890192ef47}</Project>
+      <Name>App.DataLayer</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
