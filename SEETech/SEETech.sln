@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hack.DataLayer", "Hack.DataLayer\Hack.DataLayer.csproj", "{D3C268C4-A472-4592-A95D-A233A8BABB61}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hack.Api", "Hack.Api\Hack.Api.csproj", "{DFFC1B21-7450-469C-BAB6-2899560B5763}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App.DataLayer", "App.DataLayer\App.DataLayer.csproj", "{05707BF2-DD6A-41B3-96F6-EF890192EF47}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D3C268C4-A472-4592-A95D-A233A8BABB61}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D3C268C4-A472-4592-A95D-A233A8BABB61}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D3C268C4-A472-4592-A95D-A233A8BABB61}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D3C268C4-A472-4592-A95D-A233A8BABB61}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DFFC1B21-7450-469C-BAB6-2899560B5763}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DFFC1B21-7450-469C-BAB6-2899560B5763}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DFFC1B21-7450-469C-BAB6-2899560B5763}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DFFC1B21-7450-469C-BAB6-2899560B5763}.Release|Any CPU.Build.0 = Release|Any CPU
+		{05707BF2-DD6A-41B3-96F6-EF890192EF47}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{05707BF2-DD6A-41B3-96F6-EF890192EF47}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{05707BF2-DD6A-41B3-96F6-EF890192EF47}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{05707BF2-DD6A-41B3-96F6-EF890192EF47}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
