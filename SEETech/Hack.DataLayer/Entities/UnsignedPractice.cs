@@ -8,6 +8,5 @@ namespace Hack.DataLayer.Entities
 {
     public sealed class UnsignedPractice : PracticeBase
     {
-
     }
 }
