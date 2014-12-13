@@ -8,6 +8,11 @@ namespace Hack.DataLayer.Entities
 {
     public sealed class GeneralPractice : Practice
     {
+        public GeneralPractice()
+        {
+            PracticeType = PracticeTypeEnum.General;
+        }
+
         public bool SickLeaveRate { get; set; }
         public bool MedicationPrescription { get; set; }
         public bool ReferToPrimaryLaboratory { get; set; }

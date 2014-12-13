@@ -19,7 +19,7 @@ namespace Hack.DataLayer.Entities
 
         // locations.csv
         public string BusinessArea { get; set; }
-        public string PracticeType { get; set; }
+        public string PracticeTypeString { get; set; }
         public string POBox { get; set; }
         public string Email { get; set; }
         public string OfficePhone { get; set; }
@@ -32,6 +32,12 @@ namespace Hack.DataLayer.Entities
         public string CoordinateX { get; set; }
         public string CoordinateY { get; set; }
 
-        // patients.csv
+        // patients
+        public int NumberOfPatients { get; set; }
+        public int MinimumNumberOfPatients { get; set; }
+        public int AverageNumberOfPatients { get; set; }
+        public int MaximumNumberOfPatients { get; set; }
+
+        public PracticeTypeEnum PracticeType { get; set; }
     }
 }

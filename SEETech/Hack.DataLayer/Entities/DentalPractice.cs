@@ -8,6 +8,11 @@ namespace Hack.DataLayer.Entities
 {
     public sealed class DentalPractice : Practice
     {
+        public DentalPractice()
+        {
+            PracticeType = PracticeTypeEnum.Dental;
+        }
+
         public bool PortionOfPreventiveProcedures { get; set; }
         public bool PersonsWithDentalStatus { get; set; }
         public bool EmergencyPhone { get; set; }

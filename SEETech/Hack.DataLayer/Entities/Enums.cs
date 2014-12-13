@@ -11,4 +11,13 @@ namespace Hack.DataLayer.Entities
         KONC = 1,
         DZ = 2
     }
+
+    public enum PracticeTypeEnum
+    {
+        General = 1,
+        PreschoolChildren = 2,
+        Woman = 3,
+        Dental = 4,
+        Unsigned = 5
+    }
 }

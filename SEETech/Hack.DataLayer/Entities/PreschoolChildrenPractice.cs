@@ -8,6 +8,11 @@ namespace Hack.DataLayer.Entities
 {
     public sealed class PreschoolChildrenPractice : Practice
     {
+        public PreschoolChildrenPractice()
+        {
+            PracticeType = PracticeTypeEnum.PreschoolChildren;
+        }
+
         public bool MedicationPrescription { get; set; }
         public bool ReferToPrimaryLaboratory { get; set; }
         public bool PercentageOfFirstSystematicExaminationBefore2MonthsOfLife { get; set; }

@@ -17,13 +17,25 @@ namespace Hack.DataParser
     {
         static void Main(string[] args)
         {
+            Console.WriteLine("Reading files...")
+
             string[] opca = System.IO.File.ReadAllLines(@"C:\Hackaton\opca.csv");
             string[] predskolska = System.IO.File.ReadAllLines(@"C:\Hackaton\predskolska.csv");
             string[] zene = System.IO.File.ReadAllLines(@"C:\Hackaton\zene.csv");
             string[] zubari = System.IO.File.ReadAllLines(@"C:\Hackaton\zubari.csv");
             string[] nepotpisnici = System.IO.File.ReadAllLines(@"C:\Hackaton\nepotpisnici.csv");
 
+            string[] novo = System.IO.File.ReadAllLines(@"C:\Hackaton\novo.csv");
+            string[] koordinate = System.IO.File.ReadAllLines(@"C:\Hackaton\koordinate.csv");
+
+            string[] count_opca = System.IO.File.ReadAllLines(@"C:\Hackaton\count_opca.csv");
+            string[] count_predskolska = System.IO.File.ReadAllLines(@"C:\Hackaton\count_predskolska.csv");
+            string[] count_zene = System.IO.File.ReadAllLines(@"C:\Hackaton\count_zene.csv");
+            string[] count_zubari = System.IO.File.ReadAllLines(@"C:\Hackaton\count_zubari.csv");
+
             //GeneralPracticeRepository repository = new GeneralPracticeRepository();
+
+            Console.WriteLine("Adding opca...");
 
             foreach (string line in opca)
             {
@@ -50,10 +62,13 @@ namespace Hack.DataParser
                 practice.SamplesForPrimaryLabAnalysis = values[18].Trim().ToLower() == "da";
                 practice.TelephoneConsultation = values[19].Trim().ToLower() == "da";
 
-                SetLocationProperties(practice);
+                SetLocationProperties(practice, novo, koordinate);
+                SetCountProperties(practice, count_opca, 1275, 1700, 2125);
 
                 //repository.Add(practice);
             }
+
+            Console.WriteLine("Adding predskolska...");
 
             foreach (string line in predskolska)
             {
@@ -80,8 +95,11 @@ namespace Hack.DataParser
                 practice.TakingSamplesForPrimaryLabAnalysis = values[18].Trim().ToLower() == "da";
                 practice.EmergencyPhone = values[19].Trim().ToLower() == "da";
 
-                SetLocationProperties(practice);
+                SetLocationProperties(practice, novo, koordinate);
+                SetCountProperties(practice, count_predskolska, 715, 950, 1190);
             }
+
+            Console.WriteLine("Adding zene...");
 
             foreach (string line in zene)
             {
@@ -109,8 +127,11 @@ namespace Hack.DataParser
                 practice.TakingSamplesForPrimaryLabAnalysis = values[19].Trim().ToLower() == "da";
                 practice.TakingAndDeliveryOfSamplesForMicrobiologyDiagnostics = values[20].Trim().ToLower() == "da";
 
-                SetLocationProperties(practice);
+                SetLocationProperties(practice, novo, koordinate);
+                SetCountProperties(practice, count_zene, 4500, 6000, 9000);
             }
+
+            Console.WriteLine("Adding zubari...");
 
             foreach (string line in zubari)
             {
@@ -135,8 +156,11 @@ namespace Hack.DataParser
                 practice.EmergencyPhone = values[16].Trim().ToLower() == "da";
                 practice.SpecialNeedsDentalCare = values[17].Trim().ToLower() == "da";
 
-                SetLocationProperties(practice);
+                SetLocationProperties(practice, novo, koordinate);
+                SetCountProperties(practice, count_zubari, 1425, 1900, 2375);
             }
+
+            Console.WriteLine("Adding nepotpisnici...");
 
             foreach (string line in nepotpisnici)
             {
@@ -149,45 +173,62 @@ namespace Hack.DataParser
                 practice.Address = values[4].Trim();
                 practice.City = values[5].Trim();
 
-                SetLocationProperties(practice);
+                SetLocationProperties(practice, novo, koordinate);
             }
+
+            Console.WriteLine("Done.");
 
         }
 
-        static void SetLocationProperties(PracticeBase practice)
+        private static void SetCountProperties(PracticeBase practice, string[] counts, int minCount, int avgCount, int maxCount)
         {
-            string[] novo = System.IO.File.ReadAllLines(@"C:\Hackaton\novo.csv");
-            string[] koordinate = System.IO.File.ReadAllLines(@"C:\Hackaton\koordinate.csv");
-
-            foreach (string line2 in novo)
+            foreach (string line in counts)
             {
-                var values2 = line2.Split(';');
-                string code = values2[1].Trim();
+                var values = line.Split(';');
+                string code = values[1].Trim();
 
                 if (code == practice.PracticeCode)
                 {
-                    practice.PracticeName = values2[2].Trim();
-                    practice.BusinessArea = values2[3].Trim();
-                    practice.PracticeType = values2[4].Trim();
-                    practice.POBox = values2[8].Trim();
-                    practice.Email = values2[10].Trim();
-                    practice.OfficePhone = values2[11].Trim();
-                    practice.ContactPhone = values2[12].Trim();
-                    practice.WorkingHours = values2[13].Trim();
+                    int count = Int32.Parse(values[5].Trim());
+                    practice.NumberOfPatients = count;
+                    practice.MinimumNumberOfPatients = minCount;
+                    practice.AverageNumberOfPatients = avgCount;
+                    practice.MaximumNumberOfPatients = maxCount;
+                }
+            }
+        }
 
-                    string geoid = values2[14].Trim();
+        static void SetLocationProperties(PracticeBase practice, string[] novo, string[] koordinate)
+        {
+            foreach (string line in novo)
+            {
+                var values = line.Split(';');
+                string code = values[1].Trim();
 
-                    foreach (string line3 in koordinate)
+                if (code == practice.PracticeCode)
+                {
+                    practice.PracticeName = values[2].Trim();
+                    practice.BusinessArea = values[3].Trim();
+                    practice.PracticeTypeString = values[4].Trim();
+                    practice.POBox = values[8].Trim();
+                    practice.Email = values[10].Trim();
+                    practice.OfficePhone = values[11].Trim();
+                    practice.ContactPhone = values[12].Trim();
+                    practice.WorkingHours = values[13].Trim();
+
+                    string geoid = values[14].Trim();
+
+                    foreach (string line2 in koordinate)
                     {
-                        var values3 = line3.Split(';');
-                        string geoid2 = values3[0].Trim();
+                        var values2 = line2.Split(';');
+                        string geoid2 = values2[0].Trim();
 
                         if (geoid == geoid2)
                         {
-                            practice.County = values3[12].Trim();
-                            practice.Country = values3[13].Trim();
-                            practice.CoordinateX = values3[14].Trim();
-                            practice.CoordinateY = values3[15].Trim();
+                            practice.County = values2[12].Trim();
+                            practice.Country = values2[13].Trim();
+                            practice.CoordinateX = values2[14].Trim();
+                            practice.CoordinateY = values2[15].Trim();
                         }
                     }
                 }
