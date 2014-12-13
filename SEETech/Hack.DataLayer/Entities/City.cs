@@ -9,6 +9,11 @@ namespace Hack.DataLayer.Entities
 {
     public sealed class City : Entity
     {
+        public City(string name)
+        {
+            Name = name;
+        }
+
         public string Name { get; set; }
         public string POBox { get; set; }
     }

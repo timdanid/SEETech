@@ -8,8 +8,12 @@ using Hack.DataLayer.Entities;
 
 namespace Hack.DataLayer.Repositories
 {
-    class CitiesRepository : Repository<City>
+    public class CityRepository : Repository<City>
     {
-
+        public CityRepository()
+            : base("mongodb://admin:admin@ds027758.mongolab.com:27758/base")
+        {
+            
+        }
     }
 }
