@@ -160,7 +160,7 @@ function getData()
     router.getMarkers(function (data) {
         data.forEach(function (t)
         { //_lat, _lng, _title, _infoText, _icon, _id , _patientCount
-            createMarker(t.x_coordinate, t.y_coordinate, t.title, t.location, t.icon, t.id, t.patientCount)
+            createMarker(t.x_coordinate, t.y_coordinate, t.practiceName, t.location, t.icon, t.id, t.numberOfPatients)
         });
     });
 }
