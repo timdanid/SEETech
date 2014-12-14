@@ -41,14 +41,14 @@ namespace Hack.Api.Controllers
         //}
 
         [Route("api/GetCitiesForCounty")]
-        public string GetCitiesForCounty(string countyName)
+        public object GetCitiesForCounty(string countyName)
         {
             using (HackEntities entities = new HackEntities())
             {
                 County county = entities.Counties.FirstOrDefault(x => x.Name.ToLower().Contains(countyName.ToLower()));
                 if (county != null)
                 {
-                    return JsonConvert.SerializeObject(county.Cities);
+                    return county.Cities.Select(t => new { id = t.ID, name = t.Name }).ToList();
                 }
 
                 return null;
