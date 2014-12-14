@@ -65,9 +65,14 @@ app.get('/#/list/:json/', (context: Sammy.EventContext) => {
     $("#navigation").css("display", "block");
     console.log("list", context.params);
     Bootcards.OffCanvas.hide();
-    console.log(context.params.json);
+    var json = context.params.json;
     context.partial(partials["list"], (render: Sammy.RenderContext) => {
-       
+        if (ko.dataFor($("#list")[0]) != null) ko.cleanNode($("#list")[0]);
+        router.getList(json, (searchResult) => {
+            console.log(searchResult);
+            viewmodel = ko.mapping.fromJS(searchResult);
+            ko.applyBindings(viewmodel, $("#list")[0]);
+        });
     });
 });
 app.get('/#/detail/:id/', (context: Sammy.EventContext) => {

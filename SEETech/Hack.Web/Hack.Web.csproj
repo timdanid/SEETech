@@ -60,6 +60,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="scripts\source\ts\list.ts" />
     <TypeScriptCompile Include="scripts\source\ts\main.ts" />
     <TypeScriptCompile Include="scripts\source\ts\router.ts" />
     <TypeScriptCompile Include="scripts\source\ts\search.ts" />

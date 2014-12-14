@@ -37,7 +37,21 @@
             //    });
         }
 
-        public getList(callback: Function): void {
+        public getList(json: string, callback: Function): void {
+            var a = {
+                href: "abc",
+                name: "ime",
+                location: "abaafccacac"
+            };
+            callback(new Array<any>(a, a));
+             //$.ajax({
+            //    url: this.url + "",
+            //    context: document.body
+            //}).done((data: string) => {
+            //        callback(data);
+            //    }).fail((Error: any) => {
+            //        this.error(Error);
+            //    });
         }
 
 
