@@ -285,6 +285,11 @@ namespace Hack.DataParser
 
                         if (geoid == geoid2)
                         {
+                            if (practice.City.Name.ToLower() != values2[11].Trim().ToLower())
+                            {
+                                throw new Exception("City mismatch!");
+                            }
+
                             practice.CoordinateX = values2[14].Trim();
                             practice.CoordinateY = values2[15].Trim();
                         }
