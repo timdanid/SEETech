@@ -132,7 +132,7 @@ namespace Hack.DataParser
 
                     entities.Practices.Add(practice);
                     entities.SaveChanges();
-                    
+
                     Console.WriteLine("Added opca: " + practice.PracticeName);
                 }
 
@@ -299,7 +299,7 @@ namespace Hack.DataParser
                 {
                     var values = line.Split(';');
 
-                    string practiceCode = values[1].Trim();
+                    string practiceCode = values[2].Trim();
                     bool exists = entities.Practices.Any(x => x.PracticeCode == practiceCode);
                     if (exists)
                     {
@@ -309,15 +309,17 @@ namespace Hack.DataParser
 
                     Practice practice = new Practice();
                     practice.RUPS = values[0].Trim();
+                    practice.Address = values[5].Trim();
+                    practice.PracticeName = values[3].Trim();
                     practice.PracticeCode = practiceCode;
                     practice.PracticeType = entities.PracticeTypes.First(x => x.ID == 5);
-                    practice.PracticeName = values[2].Trim();
-                    practice.DoctorStatus = GetDoctorStatus(entities, values[3].Trim().ToLower());
-                    practice.Address = values[4].Trim();
-                    var city = GetCity(entities, values[5].Trim());
+                    
+                    practice.DoctorStatus = GetDoctorStatus(entities, values[4].Trim().ToLower());
+                    
+                    var city = GetCity(entities, values[6].Trim());
                     if (city == null)
                     {
-                        Console.WriteLine("City " + values[5].Trim() + " not found, skipping...");
+                        Console.WriteLine("City " + values[6].Trim() + " not found, skipping...");
                         continue;
                     }
                     practice.City = city;
