@@ -94,9 +94,34 @@ function createMarker(_lat, _lng, _title, _infoText,_icon) {
     _collection.push(_marker);
 }
 
+function createMarker(_lat, _lng, _title, _infoText, _icon, _id , _location, _patientCount) {
+    var _infoWindow = new google.maps.InfoWindow({
+        content: "<a src=\"/#/details/" + _title + "\"style=\"width: auto; height:uto;\" >" + _infoText + "</a>"
+    });
 
+    var _mPosition = new google.maps.LatLng(_lat, _lng);
+    var _marker = new google.maps.Marker({
+        position: _mPosition,
+        title: _title,
+        icon: _icon,
+        animation: google.maps.Animation.DROP,
+        map: _map
 
-function addToCollection(_lat, _lng, _title, _infoText,_icon)
+    });
+
+    google.maps.event.addListener(_marker, 'click', function () {
+        _infoWindow.open(_map, _marker);
+        if (_marker.getAnimation() != null) {
+            _marker.setAnimation(null);
+        } else {
+            _marker.setAnimation(google.maps.Animation.BOUNCE);
+        }
+    });
+
+    _collection.push(_marker);
+}
+
+function addToCollection(_mcollection)
 {
     createMarker(_lat, _lng, _title, _infoText, _icon);
 }
@@ -133,8 +158,8 @@ function getData()
 {
     router.getMarkers(function (data) {
         data.forEach(function (t)
-        {
-            createMarker(t.x_coordinate, t.y_coordinate, t.title, t.location + "|" + t.name, t.icon)
+        { //_lat, _lng, _title, _infoText, _icon, _id , _location, _patientCount
+            createMarker(t.x_coordinate, t.y_coordinate, t.title, t.location , t.icon)
         });
     });
 }
@@ -153,6 +178,7 @@ function markerClusterTest()
 
 function initialize()
 {
-    navigator.geolocation.getCurrentPosition(geolocationEnabled, geolocationDisabled);   
+    navigator.geolocation.getCurrentPosition(geolocationEnabled, geolocationDisabled);
+    getData();
 }
 

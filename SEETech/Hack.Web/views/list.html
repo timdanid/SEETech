@@ -2,9 +2,12 @@
     <div class="panel panel-default">
         <div class="list-group" data-bind="foreach: $data">
             <a class="list-group-item" data-bind="href: href">
-                <img src="/images/" class="img-rounded pull-left" />
-                <h4 class="list-group-item-heading" data-bind="text: name"></h4>
-                <p class="list-group-item-text" data-bind="text: location"></p>
+                <i data-bind="visible: general" class="fa fa-3x fa-medkit pull-left"></i>
+                <i data-bind="visible: preschool" class="fa fa-3x fa-child pull-left"></i>
+                <i data-bind="visible: women" class="fa fa-3x fa-female pull-left"></i>
+                <i data-bind="visible: dental" class="fa fa-3x fa-user-md pull-left"></i>
+                <h4 style="padding-left: 80px" class="list-group-item-heading" data-bind="text: name"></h4>
+                <p style="padding-left: 80px" class="list-group-item-text" data-bind="text: location"></p>
             </a>
         </div>
     </div>

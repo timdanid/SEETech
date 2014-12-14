@@ -95,7 +95,7 @@ namespace Hack.Api.Controllers
                     types.Add(4);
                 }
 
-                return practice.Where(x => types.Contains(x.PracticeTypeID)).Select(t => new { href = "/#/detail/" + t.ID + "/", name = t.PracticeName, location = t.Address, type= t.PracticeType.ID }).ToList();
+                return practice.Where(x => types.Contains(x.PracticeTypeID)).Select(t => new { href = "/#/detail/" + t.ID + "/", name = t.PracticeName, location = t.Address, general= t.PracticeType.ID == 1 ? true : false, dental= t.PracticeType.ID == 4? true:false, women = t.PracticeType.ID == 3 ? true:false, preschool = t.PracticeType.ID == 2 ? true: false }).ToList();
             }
         }
 
@@ -166,7 +166,19 @@ namespace Hack.Api.Controllers
         {
             using (HackEntities entities = new HackEntities())
             {
-                return entities.Practices.Select(t => new { id = t.ID, practiceName = t.PracticeName, x = t.CoordinateX, y = t.CoordinateY, location = t.Address + ", " + t.City.Name, numberOfPatients = t.NumberOfPatients }).ToList();
+               
+                return entities.Practices.Select(t => new { icon = getIcon(t.PracticeType.ID), id = t.ID, x_coordinate = t.CoordinateX, y_coordinate = t.CoordinateY, location = t.Address + ", " + t.City.Name }).ToList();
+            }
+        }
+        private string getIcon(int practiseId)
+        {
+            switch (practiseId)
+            { 
+                case 1: return "/images/market-icons/marker-64-base1.png";
+                case 2: return "/images/market-icons/marker-64-base2.png";
+                case 3: return "/images/market-icons/marker-64-base3.png";
+                case 4: return "/images/market-icons/marker-64-base4.png";
+                default: return null;
             }
         }
     }
