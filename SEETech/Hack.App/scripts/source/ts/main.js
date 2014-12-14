@@ -81,8 +81,11 @@ app.get('/#/detail/:id/', function (context) {
     Bootcards.OffCanvas.hide();
     var id = context.params.id;
     context.partial(partials["detail"], function (render) {
+        if (ko.dataFor($("#detail")[0]) != null)
+            ko.cleanNode($("#detail")[0]);
         router.getDetail(id, function (data) {
-            console.log(data);
+            viewmodel = ko.mapping.fromJS(data);
+            ko.applyBindings(viewmodel, $("#detail")[0]);
         });
     });
 });

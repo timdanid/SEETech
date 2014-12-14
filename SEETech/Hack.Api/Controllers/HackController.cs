@@ -166,7 +166,8 @@ namespace Hack.Api.Controllers
         {
             using (HackEntities entities = new HackEntities())
             {
-                return entities.Practices.Select(t => new { icon = GetIcon(t.PracticeType.ID), id = t.ID, practiceName = t.PracticeName, x_coordinate = t.CoordinateX, y_coordinate = t.CoordinateY, location = t.Address + ", " + t.City.Name, numberOfPatients = t.NumberOfPatients }).ToList();
+                var a =  entities.Practices.Select(t => new { id = t.ID, type= t.PracticeType.ID, practiceName = t.PracticeName, x_coordinate = t.CoordinateX, y_coordinate = t.CoordinateY, location = t.Address + ", " + t.City.Name, numberOfPatients = t.NumberOfPatients }).ToList();
+                return a.Select(t => new { t.id, t.practiceName, t.x_coordinate, t.y_coordinate, t.location, t.numberOfPatients, icon = GetIcon(t.type) });
             }
         }
 
