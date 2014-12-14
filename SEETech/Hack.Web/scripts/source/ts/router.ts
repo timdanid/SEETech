@@ -66,8 +66,17 @@
             //        this.error(Error);
             //    });
         }
-
-
+        //_lat, _lng, _title, _infoText,_icon
+        public getMarkers(callback: Function): void {
+            $.ajax({
+                url: this.url + "getMarkers",
+                context: document.body
+            }).done((data: Array<Marker>) => {
+                callback(data);
+                }).fail((Error: any) => {
+                    this.error(Error);
+                });
+        }
 
     }
 

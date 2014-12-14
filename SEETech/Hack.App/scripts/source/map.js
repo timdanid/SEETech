@@ -3,6 +3,7 @@ var _geolocation;
 var _mapoptions;
 var _collection = [];
 
+
 function geolocationEnabled(position)
 {
     _geolocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
@@ -68,7 +69,7 @@ function createMarker(_lat, _lng, _title, _infoText)
 }
 function createMarker(_lat, _lng, _title, _infoText,_icon) {
     var _infoWindow = new google.maps.InfoWindow({
-        content: _infoText
+        content: "<a src=\"/#/details/" + _title + "\"style=\"width: auto; height:uto;\" >" +_infoText + "</a>"
     });
     
     var _mPosition = new google.maps.LatLng(_lat, _lng);
@@ -76,13 +77,20 @@ function createMarker(_lat, _lng, _title, _infoText,_icon) {
         position: _mPosition,
         title: _title,
         icon: _icon,
+        animation: google.maps.Animation.DROP,
         map: _map
         
     });
     
     google.maps.event.addListener(_marker, 'click', function () {
         _infoWindow.open(_map, _marker);
+        if (_marker.getAnimation() != null) {
+            _marker.setAnimation(null);
+        } else {
+            _marker.setAnimation(google.maps.Animation.BOUNCE);
+        }
     });
+    
     _collection.push(_marker);
 }
 
@@ -121,8 +129,15 @@ function createMarketCluster(_collection)
         };
     var cluster = new MarkerClusterer(_map, _collection,mcOptions);
 }
-
-
+function getData()
+{
+    router.getMarkers(function (data) {
+        data.forEach(function (t)
+        {
+            createMarker(t.x_coordinate, t.y_coordinate, t.title, t.location + "|" + t.name, t.icon)
+        });
+    });
+}
 function markerCollectionTest()
 {
     createMarker(45, 15.454, "title", "neki infač", '/images/market-icons/marker-64-base1.png');
