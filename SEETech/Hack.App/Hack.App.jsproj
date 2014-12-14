@@ -125,7 +125,6 @@
     <Content Include="images\market-icons\marker-64-base3.png" />
     <Content Include="images\market-icons\marker-64-base4.png" />
     <Content Include="images\market-icons\marker-64.png" />
-    <Content Include="main.html" />
     <Content Include="map.html" />
     <Content Include="plugins\org.apache.cordova.geolocation\.fetch.json" />
     <Content Include="plugins\org.apache.cordova.geolocation\CONTRIBUTING.md" />
@@ -182,6 +181,7 @@
     <Content Include="views\list.html" />
     <Content Include="views\map.html" />
     <Content Include="views\search.html" />
+    <Content Include="views\start.html" />
     <Folder Include="css\source\" />
     <Content Include="merges\android\scripts\android2.3-jscompat.js" />
     <Content Include="merges\android\scripts\platformOverrides.js" />
@@ -253,7 +253,11 @@
     <Content Include="res\screens\wp8\screen-portrait.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="scripts\source\ts\list.ts" />
     <TypeScriptCompile Include="scripts\source\ts\main.ts" />
+    <TypeScriptCompile Include="scripts\source\ts\markers.ts" />
+    <TypeScriptCompile Include="scripts\source\ts\router.ts" />
+    <TypeScriptCompile Include="scripts\source\ts\search.ts" />
     <TypeScriptCompile Include="scripts\typing\jquery\jquery.d.ts" />
     <TypeScriptCompile Include="scripts\typing\knockout.mapping\knockout.mapping.d.ts" />
     <TypeScriptCompile Include="scripts\typing\knockout\knockout.d.ts" />

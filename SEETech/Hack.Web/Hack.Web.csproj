@@ -42,7 +42,6 @@
     <Content Include="scripts\vendor\knockout.js" />
     <Content Include="scripts\vendor\knockout.mapping.js" />
     <Content Include="scripts\vendor\sammy.js" />
-    <Content Include="views\map.html" />
     <Content Include="views\detail.html" />
     <Content Include="views\search.html" />
     <Content Include="views\start.html" />

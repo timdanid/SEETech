@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="google" value="notranslate">
-    <title>Hack.App</title>
+    <title>Hzzo</title>
 
     <!-- Hack.App references -->
     <link href="css/vendor/bootstrap.min.css" rel="stylesheet" />
@@ -16,7 +16,7 @@
 <body>
 
     <!-- fixed top navbar -->
-    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div style="background-color:#9E1E62" style="display: none" id="navigation" class="navbar navbar-default navbar-fixed-top" role="navigation">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -31,21 +31,60 @@
                 <i class="fa fa-lg fa-bars"></i>
                 <span>Menu</span>
             </button>
-            <a class="navbar-brand" title="Bootcards Starter" href="/">Bootcards Starter</a>
+            <a class="navbar-brand" style="color:#FFF" title="Hzzo" href="/">Hzzo</a>
         </div>
     </div>
     <!-- slide in off canvas menu (mobile only) -->
     <nav class="navmenu offcanvas offcanvas-left">
-        <ul class="nav" data-bind="foreach: sidebar">
-            <li data-bind="css: { active: isActive()}">
-                <a data-bind="href: href, glyphText: {glyph: icon, text: name}"></a>
+        <ul class="nav">
+            <li id="mapSide">
+                <a href="/#/map/">
+                    <i class="fa fa-lg fa-map-marker"></i>Karta
+                </a>
+            </li>
+            <li id="searchSide">
+                <a href="/#/search/">
+                    <i class="fa fa-lg fa-medkit"></i>Pretraživanje
+                </a>
+            </li>
+            <li id="infoSide">
+                <a href="/#/info/">
+                    <i class="fa fa-lg fa-building-o"></i>Zdravstvena zaštita
+                </a>
+            </li>
+            <li id="aboutSide">
+                <a href="/#/about/">
+                    <i class="fa fa-lg fa-users"></i>O HZZO
+                </a>
             </li>
         </ul>
     </nav><!--nav-->
-    <a href="map.html">abc</a>
+    <!--View container-->
+    <div id="container" class="container bootcards-container push-right" style="padding:0">
+    </div>
     <!-- Cordova reference, this is added to your app when it's built. -->
-    <script src="cordova.js"></script>
+    <script src="scripts/vendor/jquery.js"></script>
+    <script src="scripts/vendor/bootstrap.min.js"></script>
+    <script src="scripts/vendor/bootcards.min.js"></script>
+    <script src="scripts/vendor/fastclick.min.js"></script>
+    <script src="scripts/vendor/sammy.js"></script>
     <script src="scripts/index.js"></script>
- 
+    <script src="scripts/vendor/knockout.js"></script>
+    <script src="scripts/vendor/knockout.mapping.js"></script>
+    <script src="scripts/source/href.js"></script>
+    <script src="scripts/source/ts/search.js"></script>
+    <script src="scripts/source/ts/router.js"></script>
+    <script src="scripts/source/ts/main.js"></script>
+    <script>
+        bootcards.init({
+            offCanvasHideOnMainClick: true,
+            enableTabletPortraitMode: true,
+            disableRubberBanding: true
+        });
+
+        window.addEventListener('load', function () {
+            FastClick.attach(document.body);
+        }, false);
+    </script>
 </body>
 </html>
