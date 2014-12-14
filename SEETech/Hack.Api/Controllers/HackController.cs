@@ -11,7 +11,7 @@ using Newtonsoft.Json;
 namespace Hack.Api.Controllers
 {
     [EnableCors("*", "*", "*")]
-    public class Controller : ApiController
+    public class HackController : ApiController
     {
         //// GET api/<controller>
         //public IEnumerable<string> Get()
@@ -40,6 +40,7 @@ namespace Hack.Api.Controllers
         //{
         //}
 
+        [Route("api/GetCitiesForCounty")]
         public string GetCitiesForCounty(string countyName)
         {
             using (HackEntities entities = new HackEntities())
