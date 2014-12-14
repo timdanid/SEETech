@@ -41,12 +41,20 @@ namespace Hack.DataParser
                     string countyName = values[12].Trim();
                     string countryName = values[13].Trim();
 
+                    if (pobox.Trim() == "NULL" || cityName.Trim() == "NULL" || countyName.Trim() == "NULL" || countryName.Trim() == "NULL")
+                    {
+                        Console.WriteLine("Skipped: " + pobox + ", " + cityName + ", " + countyName + ", " + countryName);
+                        continue;
+                    }
+
                     Country country = entities.Countries.FirstOrDefault(x => x.Name.ToLower() == countryName.ToLower());
                     if (country == null)
                     {
                         country = new Country();
                         country.Name = countryName;
                         entities.Countries.Add(country);
+                        entities.SaveChanges();
+                        Console.WriteLine("Added country: " + country.Name);
                     }
 
                     County county = entities.Counties.FirstOrDefault(x => x.Name.ToLower() == countyName.ToLower());
@@ -56,9 +64,11 @@ namespace Hack.DataParser
                         county.Name = countyName;
                         county.Country = country;
                         entities.Counties.Add(county);
+                        entities.SaveChanges();
+                        Console.WriteLine("Added county: " + county.Name);
                     }
 
-                    City city = entities.Cities.FirstOrDefault(x => x.Name.ToLower() == countyName.ToLower());
+                    City city = entities.Cities.FirstOrDefault(x => x.Name.ToLower() == cityName.ToLower());
                     if (city == null)
                     {
                         city = new City();
@@ -67,6 +77,8 @@ namespace Hack.DataParser
                         city.Country = country;
                         city.POBox = pobox;
                         entities.Cities.Add(city);
+                        entities.SaveChanges();
+                        Console.WriteLine("Added city: " + city.Name);
                     }
                 }
 
@@ -78,9 +90,17 @@ namespace Hack.DataParser
                 {
                     var values = line.Split(';');
 
+                    string practiceCode = values[1].Trim();
+                    bool exists = entities.Practices.Any(x => x.PracticeCode == practiceCode);
+                    if (exists)
+                    {
+                        Console.WriteLine("Found duplicate " + practiceCode + ", skipping...");
+                        continue;
+                    }
+
                     Practice practice = new Practice();
                     practice.RUPS = values[0].Trim();
-                    practice.PracticeCode = values[1].Trim();
+                    practice.PracticeCode = practiceCode;
                     //practice.PracticeName = values[2].Trim();
                     practice.DoctorStatus = GetDoctorStatus(entities, values[3].Trim().ToLower());
                     practice.Address = values[4].Trim();
@@ -104,6 +124,8 @@ namespace Hack.DataParser
                     SetCountProperties(practice, count_opca);
 
                     entities.Practices.Add(practice);
+                    entities.SaveChanges();
+                    Console.WriteLine("Added opca: " + practice.PracticeName);
                 }
 
                 entities.SaveChanges();
@@ -112,9 +134,18 @@ namespace Hack.DataParser
                 foreach (string line in predskolska)
                 {
                     var values = line.Split(';');
+
+                    string practiceCode = values[1].Trim();
+                    bool exists = entities.Practices.Any(x => x.PracticeCode == practiceCode);
+                    if (exists)
+                    {
+                        Console.WriteLine("Found duplicate " + practiceCode + ", skipping...");
+                        continue;
+                    }
+
                     Practice practice = new Practice();
                     practice.RUPS = values[0].Trim();
-                    practice.PracticeCode = values[1].Trim();
+                    practice.PracticeCode = practiceCode;
                     //practice.PracticeName = values[2].Trim();
                     practice.DoctorStatus = GetDoctorStatus(entities, values[3].Trim().ToLower());
                     practice.Address = values[4].Trim();
@@ -139,6 +170,8 @@ namespace Hack.DataParser
                     SetCountProperties(practice, count_predskolska);
 
                     entities.Practices.Add(practice);
+                    entities.SaveChanges();
+                    Console.WriteLine("Added predskolska: " + practice.PracticeName);
                 }
 
                 entities.SaveChanges();
@@ -147,9 +180,18 @@ namespace Hack.DataParser
                 foreach (string line in zene)
                 {
                     var values = line.Split(';');
+
+                    string practiceCode = values[1].Trim();
+                    bool exists = entities.Practices.Any(x => x.PracticeCode == practiceCode);
+                    if (exists)
+                    {
+                        Console.WriteLine("Found duplicate " + practiceCode + ", skipping...");
+                        continue;
+                    }
+
                     Practice practice = new Practice();
                     practice.RUPS = values[0].Trim();
-                    practice.PracticeCode = values[1].Trim();
+                    practice.PracticeCode = practiceCode;
                     //practice.PracticeName = values[2].Trim();
                     practice.DoctorStatus = GetDoctorStatus(entities, values[3].Trim().ToLower());
                     practice.Address = values[4].Trim();
@@ -174,6 +216,8 @@ namespace Hack.DataParser
                     SetCountProperties(practice, count_zene);
 
                     entities.Practices.Add(practice);
+                    entities.SaveChanges();
+                    Console.WriteLine("Added zena: " + practice.PracticeName);
                 }
 
                 entities.SaveChanges();
@@ -182,9 +226,18 @@ namespace Hack.DataParser
                 foreach (string line in zubari)
                 {
                     var values = line.Split(';');
+
+                    string practiceCode = values[1].Trim();
+                    bool exists = entities.Practices.Any(x => x.PracticeCode == practiceCode);
+                    if (exists)
+                    {
+                        Console.WriteLine("Found duplicate " + practiceCode + ", skipping...");
+                        continue;
+                    }
+
                     Practice practice = new Practice();
                     practice.RUPS = values[0].Trim();
-                    practice.PracticeCode = values[1].Trim();
+                    practice.PracticeCode = practiceCode;
                     //practice.PracticeName = values[2].Trim();
                     practice.DoctorStatus = GetDoctorStatus(entities, values[3].Trim().ToLower());
                     practice.Address = values[4].Trim();
@@ -206,6 +259,8 @@ namespace Hack.DataParser
                     SetCountProperties(practice, count_zubari);
 
                     entities.Practices.Add(practice);
+                    entities.SaveChanges();
+                    Console.WriteLine("Added zubar: " + practice.PracticeName);
                 }
 
                 entities.SaveChanges();
@@ -214,9 +269,18 @@ namespace Hack.DataParser
                 foreach (string line in nepotpisnici)
                 {
                     var values = line.Split(';');
+
+                    string practiceCode = values[1].Trim();
+                    bool exists = entities.Practices.Any(x => x.PracticeCode == practiceCode);
+                    if (exists)
+                    {
+                        Console.WriteLine("Found duplicate " + practiceCode + ", skipping...");
+                        continue;
+                    }
+
                     Practice practice = new Practice();
                     practice.RUPS = values[0].Trim();
-                    practice.PracticeCode = values[1].Trim();
+                    practice.PracticeCode = practiceCode;
                     //practice.PracticeName = values[2].Trim();
                     practice.DoctorStatus = GetDoctorStatus(entities, values[3].Trim().ToLower());
                     practice.Address = values[4].Trim();
@@ -225,6 +289,8 @@ namespace Hack.DataParser
                     SetLocationProperties(entities, practice, novo, koordinate);
 
                     entities.Practices.Add(practice);
+                    entities.SaveChanges();
+                    Console.WriteLine("Added nepotpisnik: " + practice.PracticeName);
                 }
 
                 entities.SaveChanges();
