@@ -10,13 +10,14 @@ module Hack {
         public location: string;
         public id: string;
 
-        public x_coordinate: Int32Array;
-        public y_coordinate: Int32Array;
+        public x_coordinate: number;
+        public y_coordinate: number;
 
-        public title: string;
+        public title: string; // name ordinacije!!!! :D
         public icon: string;
+        public patientCount: number;
 
-        constructor(Name: string, Location: string, X: Int32Array, Y: Int32Array, Title: string, Icon: string, Id: string) {
+        constructor(Name: string, Location: string, X: number, Y: number, Title: string, Icon: string, Id: string) {
             this.name = Name;
             this.location = Location;
             this.x_coordinate = X;

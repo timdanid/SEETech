@@ -125,7 +125,6 @@
     <Content Include="images\market-icons\marker-64-base3.png" />
     <Content Include="images\market-icons\marker-64-base4.png" />
     <Content Include="images\market-icons\marker-64.png" />
-    <Content Include="map.html" />
     <Content Include="plugins\org.apache.cordova.geolocation\.fetch.json" />
     <Content Include="plugins\org.apache.cordova.geolocation\CONTRIBUTING.md" />
     <Content Include="plugins\org.apache.cordova.geolocation\doc\de\index.md" />

@@ -94,7 +94,7 @@ function createMarker(_lat, _lng, _title, _infoText,_icon) {
     _collection.push(_marker);
 }
 
-function createMarker(_lat, _lng, _title, _infoText, _icon, _id , _location, _patientCount) {
+function createMarker(_lat, _lng, _title, _infoText, _icon, _id,_patientCount) {
     var _infoWindow = new google.maps.InfoWindow({
         content: "<a src=\"/#/details/" + _title + "\"style=\"width: auto; height:uto;\" >" + _infoText + "</a>"
     });
@@ -102,10 +102,11 @@ function createMarker(_lat, _lng, _title, _infoText, _icon, _id , _location, _pa
     var _mPosition = new google.maps.LatLng(_lat, _lng);
     var _marker = new google.maps.Marker({
         position: _mPosition,
-        title: _title,
+        title: _id,
         icon: _icon,
         animation: google.maps.Animation.DROP,
-        map: _map
+        map: _map,
+        patientCount: _patientCount
 
     });
 
@@ -158,8 +159,8 @@ function getData()
 {
     router.getMarkers(function (data) {
         data.forEach(function (t)
-        { //_lat, _lng, _title, _infoText, _icon, _id , _location, _patientCount
-            createMarker(t.x_coordinate, t.y_coordinate, t.title, t.location , t.icon)
+        { //_lat, _lng, _title, _infoText, _icon, _id , _patientCount
+            createMarker(t.x_coordinate, t.y_coordinate, t.title, t.location, t.icon, t.id, t.patientCount)
         });
     });
 }
