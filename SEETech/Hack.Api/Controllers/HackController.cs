@@ -40,6 +40,8 @@ namespace Hack.Api.Controllers
         //{
         //}
 
+
+        [EnableCors("*", "*", "*")]
         [Route("api/GetCitiesForCounty")]
         public object GetCitiesForCounty(string countyName)
         {

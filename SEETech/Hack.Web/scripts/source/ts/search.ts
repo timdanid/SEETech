@@ -63,7 +63,7 @@ module Hack {
 
             this.selectedProvince.subscribe((province) => {
                 if (province != undefined)
-                    router.getCities((cities: Array<City>) => {
+                    router.getCities(this.selectedProvince().name, (cities: Array<City>) => {
                         this.cities(cities);
                     });
             });

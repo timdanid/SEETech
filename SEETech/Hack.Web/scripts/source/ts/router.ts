@@ -25,16 +25,15 @@
             //    });
         }
 
-        public getCities(callback: Function): void {
-            callback(new Array<City>(new City("b", "abcb")));
-            //$.ajax({
-            //    url: this.url + "",
-            //    context: document.body
-            //}).done((data: Array<City>) => {
-            //        callback(data);
-            //    }).fail((Error: any) => {
-            //        this.error(Error);
-            //    });
+        public getCities(provinceName: string, callback: Function): void {
+            $.ajax({
+                url: this.url + "GetCitiesForCounty?countyname=" + provinceName,
+                context: document.body
+            }).done((data: Array<City>) => {
+                   callback(data);
+                }).fail((Error: any) => {
+                    this.error(Error);
+                });
         }
 
         public getList(json: string, callback: Function): void {

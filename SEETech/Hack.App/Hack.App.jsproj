@@ -117,6 +117,9 @@
     <Content Include="css\vendor\bootcards-android.min.css" />
     <Content Include="css\vendor\bootstrap-theme.min.css" />
     <Content Include="css\vendor\bootstrap.min.css" />
+    <Content Include="images\market-icons\base1-rec.png" />
+    <Content Include="images\market-icons\base2-rec.png" />
+    <Content Include="images\market-icons\base3-rec.png" />
     <Content Include="images\market-icons\marker-64-base1.png" />
     <Content Include="images\market-icons\marker-64-base2.png" />
     <Content Include="images\market-icons\marker-64-base3.png" />
@@ -162,6 +165,7 @@
     <Content Include="scripts\source\glyphText.js" />
     <Content Include="scripts\source\href.js" />
     <Content Include="scripts\source\map.js" />
+    <Content Include="scripts\source\markerClusterer\markerclusterer.js" />
     <Content Include="scripts\source\progress.js" />
     <Content Include="scripts\source\src.js" />
     <Content Include="scripts\source\timeAgo.js" />
