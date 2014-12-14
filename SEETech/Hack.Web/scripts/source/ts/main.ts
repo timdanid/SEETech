@@ -11,6 +11,7 @@ var partials: { [key: string]: string; } = {};
 
 var viewmodel: any = {};
 
+partials["detail"] = "/views/detail.html";
 partials["about"] = "/views/about.html";
 partials["info"] = "/views/info.html";
 partials["list"] = "/views/list.html";
@@ -27,12 +28,14 @@ app.get("/#/", (context: Sammy.EventContext) => {
 app.get('/#/about/', (context: Sammy.EventContext) => {
     $("#navigation").css("display", "block");
     console.log("about", context.params);
+    setActive("about");
     Bootcards.OffCanvas.hide();
     context.partial(partials["about"], (context: Sammy.EventContext) => {
     });
 });
 app.get('/#/info/', (context: Sammy.EventContext) => {
     $("#navigation").css("display", "block");
+    setActive("info");
     console.log("info", context.params);
     Bootcards.OffCanvas.hide();
     context.partial(partials["info"], (context: Sammy.RenderContext) => {
@@ -42,6 +45,7 @@ app.get('/#/info/', (context: Sammy.EventContext) => {
 
 app.get('/#/map/', (context: Sammy.EventContext) => {
     $("#navigation").css("display", "block");
+    setActive("map");
     console.log("map", context.params);
     Bootcards.OffCanvas.hide();
     context.partial(partials["map"], (render: Sammy.RenderContext) => {
@@ -50,6 +54,7 @@ app.get('/#/map/', (context: Sammy.EventContext) => {
 
 app.get('/#/search/', (context: Sammy.EventContext) => {
     $("#navigation").css("display", "block");
+    setActive("search");
     console.log("search", context.params);
     Bootcards.OffCanvas.hide();
     context.partial(partials["search"], (render: Sammy.RenderContext) => {
@@ -63,6 +68,7 @@ app.get('/#/search/', (context: Sammy.EventContext) => {
 });
 app.get('/#/list/:json/', (context: Sammy.EventContext) => {
     $("#navigation").css("display", "block");
+    setActive("search");
     console.log("list", context.params);
     Bootcards.OffCanvas.hide();
     var json = context.params.json;
@@ -79,7 +85,7 @@ app.get('/#/detail/:id/', (context: Sammy.EventContext) => {
     $("#navigation").css("display", "block");
     console.log("detail", context.params);
     Bootcards.OffCanvas.hide();
-    context.partial(partials["list"], (render: Sammy.RenderContext) => {
+    context.partial(partials["detail"], (render: Sammy.RenderContext) => {
     });
 });
 
@@ -87,3 +93,12 @@ app.get('/#/detail/:id/', (context: Sammy.EventContext) => {
 
 
 app.run('/#/');
+
+function setActive(id: string) {
+    $("#mapSide").removeClass("active");
+    $("#searchSide").removeClass("active");
+    $("#infoSide").removeClass("active");
+    $("#aboutSide").removeClass("active");
+    console.log("#" + id + "Side");
+    $("#" + id + "Side").addClass("active");
+}
