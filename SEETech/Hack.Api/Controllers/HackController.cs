@@ -65,7 +65,6 @@ namespace Hack.Api.Controllers
             {
                 return entities.Counties.Select(t => new { id = t.ID, name = t.Name }).ToList();
             }
-            return null;
         }
 
         [EnableCors("*", "*", "*")]
@@ -158,6 +157,16 @@ namespace Hack.Api.Controllers
                 }
 
                 return null;
+            }
+        }
+
+        [EnableCors("*", "*", "*")]
+        [Route("api/GetMarkers")]
+        public object GetMarkers()
+        {
+            using (HackEntities entities = new HackEntities())
+            {
+                return entities.Practices.Select(t => new { id = t.ID, x = t.CoordinateX, y = t.CoordinateY, location = t.Address + ", " + t.City.Name }).ToList();
             }
         }
     }
