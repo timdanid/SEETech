@@ -95,7 +95,7 @@ namespace Hack.Api.Controllers
                     types.Add(4);
                 }
 
-                return practice.Where(x => types.Contains(x.PracticeTypeID)).Select(t => new { href = "/#/detail/" + t.ID + "/", name = t.PracticeName, location = t.Address, type= t.PracticeType.ID }).ToList();
+                return practice.Where(x => types.Contains(x.PracticeTypeID)).Select(t => new { href = "/#/detail/" + t.ID + "/", name = t.PracticeName, location = t.Address, general= t.PracticeType.ID == 1 ? true : false, dental= t.PracticeType.ID == 4? true:false, women = t.PracticeType.ID == 3 ? true:false, preschool = t.PracticeType.ID == 2 ? true: false }).ToList();
             }
         }
 
