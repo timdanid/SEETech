@@ -65,5 +65,36 @@ namespace Hack.Api.Controllers
                 return entities.Counties.Select(t => new { id = t.ID, name = t.Name }).ToList();
             }
         }
+
+        [Route("api/GetPracticesList")]
+        public object GetPracticesList(string query, bool general, bool preschool, bool women, bool dental)
+        {
+            using (HackEntities entities = new HackEntities())
+            {
+                List<Practice> practice =
+                    entities.Practices.Where(x => x.City.Name.ToLower().Contains(query.ToLower()) || x.Address.ToLower().Contains(query.ToLower())).ToList();
+
+                List<int> types = new List<int>();
+
+                if (general)
+                {
+                    types.Add(1);
+                }
+                if (preschool)
+                {
+                    types.Add(2);
+                }
+                if (women)
+                {
+                    types.Add(3);
+                }
+                if (dental)
+                {
+                    types.Add(4);
+                }
+
+                return practice.Where(x => types.Contains(x.PracticeTypeID)).Select(t => new { id = t.ID, name = t.PracticeName, address = t.Address }).ToList();
+            }
+        }
     }
 }

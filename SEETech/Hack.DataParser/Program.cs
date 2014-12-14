@@ -343,6 +343,11 @@ namespace Hack.DataParser
 
         public static City GetCity(HackEntities entities, string cityName)
         {
+            if (cityName.ToLower() == "grad zagreb")
+            {
+                cityName = "Zagreb";
+            }
+
             return entities.Cities.FirstOrDefault(x => x.Name.ToLower() == cityName.ToLower());
         }
 
