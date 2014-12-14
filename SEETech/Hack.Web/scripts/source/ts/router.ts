@@ -37,9 +37,9 @@
 
         public getList(query: string, general: boolean, preschool : boolean, women: boolean, dental: boolean, callback: Function): void {
             $.ajax({
-                url: this.url + "GetPracticesList?query=" + query + "&general=" + general + "&preschool=" + preschool + "&women=" + women + "&dental=" + dental, 
-                context: document.body
+                url: this.url + "GetPracticesList?query=" + query + "&general=" + general + "&preschool=" + preschool + "&women=" + women + "&dental=" + dental
             }).done((data: any) => {
+                console.log(data);
                     callback(data);
                 }).fail((Error: any) => {
                     this.error(Error);

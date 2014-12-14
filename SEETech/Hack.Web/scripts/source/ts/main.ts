@@ -71,10 +71,11 @@ app.get('/#/list/:json/', (context: Sammy.EventContext) => {
     setActive("search");
     console.log("list", context.params);
     Bootcards.OffCanvas.hide();
-    var json = context.params.json;
+    var json = JSON.parse(context.params.json);
+    console.log(json);
     context.partial(partials["list"], (render: Sammy.RenderContext) => {
         if (ko.dataFor($("#list")[0]) != null) ko.cleanNode($("#list")[0]);
-        router.getList(json, (searchResult) => {
+        router.getList(json.city.name, json.general, json.preschool, json.woman, json.dental, (searchResult) => {
             console.log(searchResult);
             viewmodel = ko.mapping.fromJS(searchResult);
             ko.applyBindings(viewmodel, $("#list")[0]);

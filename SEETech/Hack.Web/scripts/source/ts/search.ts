@@ -46,10 +46,10 @@ module Hack {
             return JSON.stringify({
                 city: this.selectedCity(),
                 county: this.selectedProvince(),
-                general: this.general,
-                dental: this.dental,
-                woman: this.woman,
-                preschool: this.preschool
+                general: ko.unwrap(this.general),
+                dental: ko.unwrap(this.dental),
+                woman:  ko.unwrap(this.woman),
+                preschool:  ko.unwrap(this.preschool)
             });
         }
 
