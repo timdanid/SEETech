@@ -166,11 +166,11 @@ namespace Hack.Api.Controllers
         {
             using (HackEntities entities = new HackEntities())
             {
-               
-                return entities.Practices.Select(t => new { icon = getIcon(t.PracticeType.ID), id = t.ID, x_coordinate = t.CoordinateX, y_coordinate = t.CoordinateY, location = t.Address + ", " + t.City.Name }).ToList();
+                return entities.Practices.Select(t => new { icon = GetIcon(t.PracticeType.ID), id = t.ID, practiceName = t.PracticeName, x_coordinate = t.CoordinateX, y_coordinate = t.CoordinateY, location = t.Address + ", " + t.City.Name, numberOfPatients = t.NumberOfPatients }).ToList();
             }
         }
-        private string getIcon(int practiseId)
+
+        private string GetIcon(int practiseId)
         {
             switch (practiseId)
             { 
