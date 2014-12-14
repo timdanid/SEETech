@@ -166,7 +166,19 @@ namespace Hack.Api.Controllers
         {
             using (HackEntities entities = new HackEntities())
             {
-                return entities.Practices.Select(t => new { id = t.ID, x = t.CoordinateX, y = t.CoordinateY, location = t.Address + ", " + t.City.Name }).ToList();
+               
+                return entities.Practices.Select(t => new { icon = getIcon(t.PracticeType.ID), id = t.ID, x_coordinate = t.CoordinateX, y_coordinate = t.CoordinateY, location = t.Address + ", " + t.City.Name }).ToList();
+            }
+        }
+        private string getIcon(int practiseId)
+        {
+            switch (practiseId)
+            { 
+                case 1: return "/images/market-icons/marker-64-base1.png";
+                case 2: return "/images/market-icons/marker-64-base2.png";
+                case 3: return "/images/market-icons/marker-64-base3.png";
+                case 4: return "/images/market-icons/marker-64-base4.png";
+                default: return null;
             }
         }
     }
