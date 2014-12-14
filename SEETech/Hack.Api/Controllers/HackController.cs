@@ -57,13 +57,15 @@ namespace Hack.Api.Controllers
             }
         }
 
+        [EnableCors("*", "*", "*")]
         [Route("api/GetAllCounties")]
-        public object GetAllCounties(string countyName)
+        public object GetAllCounties()
         {
             using (HackEntities entities = new HackEntities())
             {
                 return entities.Counties.Select(t => new { id = t.ID, name = t.Name }).ToList();
             }
+            return null;
         }
     }
 }
