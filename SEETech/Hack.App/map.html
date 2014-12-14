@@ -1,0 +1,53 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="google" value="notranslate">
+    <title>Hack.App</title>
+
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBv_f6s0R6oWMogK4O-fnRZDrTrVcfi2hw">
+    </script>
+    <script src="scripts/source/markerClusterer/markerclusterer.js"></script>
+    <script src="scripts/source/map.js"></script>
+</head>
+<body>
+    <button onclick="markerCollectionTest()">test</button>
+    <button onclick="markerClusterTest()">cluster</button>
+        <div style="width:100%;height:400px" id="map-canvas"></div>
+        <!--<script type="text/javascript">
+
+
+        }
+        -->
+        <script>
+            /*function initialize() {
+        navigator.geolocation.getCurrentPosition(function (position) {
+            var mapOptions = {
+                center: { lat: position.coords.latitude, lng: position.coords.longitude },
+                zoom: 12
+            };
+            var latling = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+            var map = new google.maps.Map(document.getElementById('map-canvas'),
+                mapOptions);
+            var marker = new google.maps.Marker({
+                position: latling,
+                map: map,
+                title: "Vasa pozicija"
+            });
+            var win = new google.maps.InfoWindow({
+                content: "<p>Vaša pozicija</p>"
+            });
+            google.maps.event.addListener(marker, 'click', function () {
+                win.open(map, marker);
+            });
+        });
+    }
+    */
+            google.maps.event.addDomListener(window, 'load', initialize);
+        </script>
+
+
+</body>
+</html>
