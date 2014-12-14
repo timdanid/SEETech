@@ -49,15 +49,15 @@
           <Property Name="DoctorStatusID" Type="int" Nullable="false" />
           <Property Name="Address" Type="nvarchar(max)" Nullable="false" />
           <Property Name="CityID" Type="int" Nullable="false" />
-          <Property Name="BusinessArea" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="PracticeTypeDescription" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="OfficePhone" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="ContactPhone" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="WorkingHours" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="CoordinateX" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="CoordinateY" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="NumberOfPatients" Type="int" Nullable="false" />
+          <Property Name="BusinessArea" Type="nvarchar(max)" />
+          <Property Name="PracticeTypeDescription" Type="nvarchar(max)" />
+          <Property Name="Email" Type="nvarchar(max)" />
+          <Property Name="OfficePhone" Type="nvarchar(max)" />
+          <Property Name="ContactPhone" Type="nvarchar(max)" />
+          <Property Name="WorkingHours" Type="nvarchar(max)" />
+          <Property Name="CoordinateX" Type="nvarchar(max)" />
+          <Property Name="CoordinateY" Type="nvarchar(max)" />
+          <Property Name="NumberOfPatients" Type="int" />
           <Property Name="ReferToSpecialistHealthCare" Type="bit" Nullable="false" />
           <Property Name="PeerGroup" Type="bit" Nullable="false" />
           <Property Name="PreventivePrograms" Type="bit" Nullable="false" />
@@ -278,15 +278,15 @@
           <Property Name="DoctorStatusID" Type="Int32" Nullable="false" />
           <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="CityID" Type="Int32" Nullable="false" />
-          <Property Name="BusinessArea" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="PracticeTypeDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="OfficePhone" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="ContactPhone" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="WorkingHours" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="CoordinateX" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="CoordinateY" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="NumberOfPatients" Type="Int32" Nullable="false" />
+          <Property Name="BusinessArea" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PracticeTypeDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="OfficePhone" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ContactPhone" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="WorkingHours" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CoordinateX" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CoordinateY" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="NumberOfPatients" Type="Int32" />
           <Property Name="ReferToSpecialistHealthCare" Type="Boolean" Nullable="false" />
           <Property Name="PeerGroup" Type="Boolean" Nullable="false" />
           <Property Name="PreventivePrograms" Type="Boolean" Nullable="false" />
