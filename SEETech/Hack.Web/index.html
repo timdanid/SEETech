@@ -14,50 +14,54 @@
     <link href="http://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" />
 </head>
 <body>
-    
-    <div class="jumbotron">
 
-    </div>
-    <div class="bootcards-list" style="position:fixed;bottom:0;width:100%;">
-        <div class="panel panel-default">
-            <div class="list-group">
-                <a class="list-group-item" href="main.html#/map/">
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <i class="fa fa-3x fa-map-marker pull-left"></i>
-                            <h4 class="list-group-item-heading">Karta zdravstvenih službi</h4>
-                        </div>
-                    </div>
-                </a>
-                <a class="list-group-item" href="main.html#/search/">
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <i class="fa fa-3x fa-search pull-left"></i>
-                            <h4 class="list-group-item-heading">Pretraživanje</h4>
-                        </div>
-                    </div>
-                </a>
-                <a class="list-group-item" href="main.html#/info/">
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <i class="fa fa-3x fa-medkit pull-left"></i>
-                            <h4 class="list-group-item-heading">Zdravstvena zaštita</h4>
-                        </div>
-                    </div>
-                </a>
-                <a class="list-group-item" href="main.html#/about/">
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <i class="fa fa-3x fa-building-o pull-left"></i>
-                            <h4 class="list-group-item-heading">HZZO</h4>
-                        </div>
-                    </div>
-                </a>
+    <!-- fixed top navbar -->
+    <div style="display: none" id="navigation" class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
             </div>
+            <!-- menu button to show/ hide the off canvas menu -->
+            <button type="button" class="btn btn-default btn-menu pull-left" data-toggle="offcanvas">
+                <i class="fa fa-lg fa-bars"></i>
+                <span>Menu</span>
+            </button>
+            <a class="navbar-brand" title="Bootcards Starter" href="/">Bootcards Starter</a>
         </div>
     </div>
-
-
+    <!-- slide in off canvas menu (mobile only) -->
+    <nav class="navmenu offcanvas offcanvas-left">
+        <ul class="nav">
+            <li>
+                <a href="/#/map/">
+                    <i class="fa fa-lg fa-dashboard"></i>Karta
+                </a>
+            </li>
+            <li>
+                <a href="/#/search/">
+                    <i class="fa fa-lg fa-users"></i>Pretraživanje
+                </a>
+            </li>
+            <li>
+                <a href="/#/info/">
+                    <i class="fa fa-lg fa-users"></i>Zdravstvena zaštita
+                </a>
+            </li>
+            <li>
+                <a href="/#/about/">
+                    <i class="fa fa-lg fa-users"></i>O HZZO
+                </a>
+            </li>
+        </ul>
+    </nav><!--nav-->
+    <!--View container-->
+    <div id="container" class="container bootcards-container push-right" style="padding:0">
+    </div>
     <!-- Cordova reference, this is added to your app when it's built. -->
     <script src="scripts/vendor/jquery.js"></script>
     <script src="scripts/vendor/bootstrap.min.js"></script>
@@ -65,8 +69,17 @@
     <script src="scripts/vendor/fastclick.min.js"></script>
     <script src="scripts/vendor/sammy.js"></script>
     <script src="scripts/index.js"></script>
+    <script src="scripts/vendor/knockout.js"></script>
+    <script src="scripts/vendor/knockout.mapping.js"></script>
+    <script src="scripts/source/href.js"></script>
+    <script src="scripts/source/ts/search.js"></script>
+    <script src="scripts/source/ts/router.js"></script>
+    <script src="scripts/source/ts/main.js"></script>
     <script>
         bootcards.init({
+            offCanvasHideOnMainClick: true,
+            enableTabletPortraitMode: true,
+            disableRubberBanding: true
         });
 
         window.addEventListener('load', function () {
