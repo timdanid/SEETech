@@ -40,17 +40,35 @@ module Hack {
         public woman: KnockoutObservable<boolean>;
         public preschool: KnockoutObservable<boolean>;
 
+        public toJson() {
+            return ko.toJSON(this);
+        }
+
+        public navigateToList() {
+            return "/#/list/" + this.toJson() + "/";
+        }
+
         constructor(provinces: Array<Province>) {
             this.provinces = ko.observableArray(provinces);
             this.selectedProvince = ko.observable(null);
             this.selectedCity = ko.observable(null);
 
-            this.cities = ko.observableArray([]);
+
+            this.cities = ko.observableArray(new Array<City>());
 
             this.general = ko.observable(true);
             this.dental = ko.observable(true);
             this.woman = ko.observable(true);
             this.preschool = ko.observable(true);
+
+            this.selectedProvince.subscribe((province) => {
+                if (province != undefined)
+                    router.getCities((cities: Array<City>) => {
+                        this.cities(cities);
+                    });
+            });
+
+
         }
     }
 }
