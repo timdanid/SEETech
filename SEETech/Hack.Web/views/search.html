@@ -12,6 +12,8 @@
                     <select class="form-control" data-bind="options: provinces, optionsText: 'name', value: selectedProvince, optionsCaption: 'Izaberi županiju'"></select>
                 </div>
             </div>
+
+
             <div class="form-group">
                 <label class="col-xs-2 control-label">Grad</label>
                 <div class="col-xs-10">
@@ -19,23 +21,23 @@
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-xs-3 control-label">Opća:</label>
-                <div class="col-xs-3">
-                    <input type="checkbox" data-bind="checked: general" />
+                <div class="col-xs-6">
+                    <input type="checkbox" id="check1" class="check" data-bind="checked: general" />
+                    <label class="check control-label" for="check1">Opća</label>
                 </div>
-                <label class="col-xs-3 control-label">Zubar:</label>
-                <div class="col-xs-3">
-                    <input type="checkbox" data-bind="checked: dental" />
+                <div class="col-xs-6">
+                    <input type="checkbox" id="check2" class="check" data-bind="checked: dental" />
+                    <label class="check control-label" for="check2">Zubar</label>
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-xs-3 control-label">Žene:</label>
-                <div class="col-xs-3">
-                    <input type="checkbox" data-bind="checked: woman" />
+                <div class="col-xs-6">
+                    <input id="check3" class="check" type="checkbox" data-bind="checked: woman" />
+                    <label class="check control-label" for="check3">Žene</label>
                 </div>
-                <label class="col-xs-3 control-label">Djeca:</label>
-                <div class="col-xs-3">
-                    <input type="checkbox" data-bind="checked: preschool" />
+                <div class="col-xs-6">
+                    <input id="check4" class="check" type="checkbox" data-bind="checked: preschool" />
+                    <label class="check control-label" for="check4">Djeca:</label>
                 </div>
             </div>
         </form>
