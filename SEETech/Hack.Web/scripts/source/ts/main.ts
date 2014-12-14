@@ -27,7 +27,6 @@ app.get("/#/", (context: Sammy.EventContext) => {
 
 app.get('/#/about/', (context: Sammy.EventContext) => {
     $("#navigation").css("display", "block");
-    console.log("about", context.params);
     setActive("about");
     Bootcards.OffCanvas.hide();
     context.partial(partials["about"], (context: Sammy.EventContext) => {
@@ -36,7 +35,6 @@ app.get('/#/about/', (context: Sammy.EventContext) => {
 app.get('/#/info/', (context: Sammy.EventContext) => {
     $("#navigation").css("display", "block");
     setActive("info");
-    console.log("info", context.params);
     Bootcards.OffCanvas.hide();
     context.partial(partials["info"], (context: Sammy.RenderContext) => {
     });
@@ -46,7 +44,6 @@ app.get('/#/info/', (context: Sammy.EventContext) => {
 app.get('/#/map/', (context: Sammy.EventContext) => {
     $("#navigation").css("display", "block");
     setActive("map");
-    console.log("map", context.params);
     Bootcards.OffCanvas.hide();
     context.partial(partials["map"], (render: Sammy.RenderContext) => {
     });
@@ -55,7 +52,6 @@ app.get('/#/map/', (context: Sammy.EventContext) => {
 app.get('/#/search/', (context: Sammy.EventContext) => {
     $("#navigation").css("display", "block");
     setActive("search");
-    console.log("search", context.params);
     Bootcards.OffCanvas.hide();
     context.partial(partials["search"], (render: Sammy.RenderContext) => {
         if (ko.dataFor($("#search")[0]) != null) ko.cleanNode($("#search")[0]);
@@ -69,14 +65,11 @@ app.get('/#/search/', (context: Sammy.EventContext) => {
 app.get('/#/list/:json/', (context: Sammy.EventContext) => {
     $("#navigation").css("display", "block");
     setActive("search");
-    console.log("list", context.params);
     Bootcards.OffCanvas.hide();
     var json = JSON.parse(context.params.json);
-    console.log(json);
     context.partial(partials["list"], (render: Sammy.RenderContext) => {
         if (ko.dataFor($("#list")[0]) != null) ko.cleanNode($("#list")[0]);
         router.getList(json.city.name, json.general, json.preschool, json.woman, json.dental, (searchResult) => {
-            console.log(searchResult);
             viewmodel = ko.mapping.fromJS(searchResult);
             ko.applyBindings(viewmodel, $("#list")[0]);
         });
@@ -86,7 +79,11 @@ app.get('/#/detail/:id/', (context: Sammy.EventContext) => {
     $("#navigation").css("display", "block");
     console.log("detail", context.params);
     Bootcards.OffCanvas.hide();
+    var id = context.params.id;
     context.partial(partials["detail"], (render: Sammy.RenderContext) => {
+        router.getDetail(id, (data) => {
+            console.log(data);
+        });
     });
 });
 
