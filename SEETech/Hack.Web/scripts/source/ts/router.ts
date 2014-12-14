@@ -35,21 +35,15 @@
                 });
         }
 
-        public getList(json: string, callback: Function): void {
-            var a = {
-                href: "/#/detail/id/",
-                name: "ime",
-                location: "abaafccacac"
-            };
-            callback(new Array<any>(a, a));
-             //$.ajax({
-            //    url: this.url + "",
-            //    context: document.body
-            //}).done((data: string) => {
-            //        callback(data);
-            //    }).fail((Error: any) => {
-            //        this.error(Error);
-            //    });
+        public getList(query: string, general: boolean, preschool : boolean, women: boolean, dental: boolean, callback: Function): void {
+            $.ajax({
+                url: this.url + "GetPracticesList?query=" + query + "&general=" + general + "&preschool=" + preschool + "&women=" + women + "&dental=" + dental, 
+                context: document.body
+            }).done((data: any) => {
+                    callback(data);
+                }).fail((Error: any) => {
+                    this.error(Error);
+                });
         }
 
         public getDetail(id: number, callback: Function): void {
