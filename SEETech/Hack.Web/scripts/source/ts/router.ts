@@ -13,16 +13,14 @@
         }
 
         public getProvinces(callback: Function): void {
-
-            callback(new Array<Province>(new Province("a", "abc")));
-            //$.ajax({
-            //    url: this.url + "",
-            //    context: document.body
-            //}).done((data: Array<Province>) => {
-            //        callback(data);
-            //}).fail((Error: any) => {
-            //        this.error(Error);
-            //    });
+            $.ajax({
+                url: this.url + "GetAllCounties",
+                context: document.body
+            }).done((data: Array<Province>) => {
+                    callback(data);
+            }).fail((Error: any) => {
+                    this.error(Error);
+                });
         }
 
         public getCities(provinceName: string, callback: Function): void {
@@ -30,6 +28,7 @@
                 url: this.url + "GetCitiesForCounty?countyname=" + provinceName,
                 context: document.body
             }).done((data: Array<City>) => {
+                console.log(data);
                    callback(data);
                 }).fail((Error: any) => {
                     this.error(Error);

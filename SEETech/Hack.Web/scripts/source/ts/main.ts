@@ -61,9 +61,9 @@ app.get('/#/search/', (context: Sammy.EventContext) => {
         if (ko.dataFor($("#search")[0]) != null) ko.cleanNode($("#search")[0]);
         router.getProvinces((provinces: Array<Hack.Province>) => {
             viewmodel = new Hack.SearchViewModel(provinces);
+            ko.applyBindings(viewmodel, $("#search")[0]);
         });
 
-        ko.applyBindings(viewmodel, $("#search")[0]);
     });
 });
 app.get('/#/list/:json/', (context: Sammy.EventContext) => {
