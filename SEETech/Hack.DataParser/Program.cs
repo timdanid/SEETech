@@ -30,59 +30,59 @@ namespace Hack.DataParser
             // countries, counties, cities
             using (HackEntities entities = new HackEntities())
             {
-                //Console.WriteLine("Adding countries, counties, cities...");
+                Console.WriteLine("Adding countries, counties, cities...");
 
-                //foreach (var line in koordinate)
-                //{
-                //    var values = line.Split(';');
+                foreach (var line in koordinate)
+                {
+                    var values = line.Split(';');
 
-                //    string pobox = values[10].Trim();
-                //    string cityName = values[11].Trim();
-                //    string countyName = values[12].Trim();
-                //    string countryName = values[13].Trim();
+                    string pobox = values[10].Trim();
+                    string cityName = values[11].Trim();
+                    string countyName = values[12].Trim();
+                    string countryName = values[13].Trim();
 
-                //    if (pobox.Trim() == "NULL" || cityName.Trim() == "NULL" || countyName.Trim() == "NULL" || countryName.Trim() == "NULL")
-                //    {
-                //        Console.WriteLine("Skipped: " + pobox + ", " + cityName + ", " + countyName + ", " + countryName);
-                //        continue;
-                //    }
+                    if (pobox.Trim() == "NULL" || cityName.Trim() == "NULL" || countyName.Trim() == "NULL" || countryName.Trim() == "NULL")
+                    {
+                        Console.WriteLine("Skipped: " + pobox + ", " + cityName + ", " + countyName + ", " + countryName);
+                        continue;
+                    }
 
-                //    Country country = entities.Countries.FirstOrDefault(x => x.Name.ToLower() == countryName.ToLower());
-                //    if (country == null)
-                //    {
-                //        country = new Country();
-                //        country.Name = countryName;
-                //        entities.Countries.Add(country);
-                //        entities.SaveChanges();
-                //        Console.WriteLine("Added country: " + country.Name);
-                //    }
+                    Country country = entities.Countries.FirstOrDefault(x => x.Name.ToLower() == countryName.ToLower());
+                    if (country == null)
+                    {
+                        country = new Country();
+                        country.Name = countryName;
+                        entities.Countries.Add(country);
+                        entities.SaveChanges();
+                        Console.WriteLine("Added country: " + country.Name);
+                    }
 
-                //    County county = entities.Counties.FirstOrDefault(x => x.Name.ToLower() == countyName.ToLower());
-                //    if (county == null)
-                //    {
-                //        county = new County();
-                //        county.Name = countyName;
-                //        county.Country = country;
-                //        entities.Counties.Add(county);
-                //        entities.SaveChanges();
-                //        Console.WriteLine("Added county: " + county.Name);
-                //    }
+                    County county = entities.Counties.FirstOrDefault(x => x.Name.ToLower() == countyName.ToLower());
+                    if (county == null)
+                    {
+                        county = new County();
+                        county.Name = countyName;
+                        county.Country = country;
+                        entities.Counties.Add(county);
+                        entities.SaveChanges();
+                        Console.WriteLine("Added county: " + county.Name);
+                    }
 
-                //    City city = entities.Cities.FirstOrDefault(x => x.Name.ToLower() == cityName.ToLower());
-                //    if (city == null)
-                //    {
-                //        city = new City();
-                //        city.Name = cityName;
-                //        city.County = county;
-                //        city.Country = country;
-                //        city.POBox = pobox;
-                //        entities.Cities.Add(city);
-                //        entities.SaveChanges();
-                //        Console.WriteLine("Added city: " + city.Name);
-                //    }
-                //}
+                    City city = entities.Cities.FirstOrDefault(x => x.Name.ToLower() == cityName.ToLower());
+                    if (city == null)
+                    {
+                        city = new City();
+                        city.Name = cityName;
+                        city.County = county;
+                        city.Country = country;
+                        city.POBox = pobox;
+                        entities.Cities.Add(city);
+                        entities.SaveChanges();
+                        Console.WriteLine("Added city: " + city.Name);
+                    }
+                }
 
-                //entities.SaveChanges();
+                entities.SaveChanges();
 
                 Console.WriteLine("Adding opca...");
 
