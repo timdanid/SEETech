@@ -68,6 +68,7 @@ namespace Hack.Api.Controllers
             return null;
         }
 
+        [EnableCors("*", "*", "*")]
         [Route("api/GetPracticesList")]
         public object GetPracticesList(string query, bool general, bool preschool, bool women, bool dental)
         {
@@ -98,5 +99,67 @@ namespace Hack.Api.Controllers
                 return practice.Where(x => types.Contains(x.PracticeTypeID)).Select(t => new { id = t.ID, name = t.PracticeName, location = t.Address }).ToList();
             }
         }
+
+        //[EnableCors("*", "*", "*")]
+        //[Route("api/GetPracticesDetails")]
+        //public object GetPracticesDetails(int id)
+        //{
+        //    using (HackEntities entities = new HackEntities())
+        //    {
+        //        Practice practice = entities.Practices.FirstOrDefault(x => x.ID == id);
+
+        //        if (practice != null)
+        //        {
+        //            object result = new
+        //            {
+        //                RUPS = practice.RUPS,
+        //                PracticeCode = practice.PracticeCode,
+        //                PracticeName = practice.PracticeName,
+        //                PracticeType = practice.PracticeType.Name,
+        //                DoctorStatus = practice.DoctorStatus.Name,
+        //                Address = practice.Address,
+        //                City = practice.City.Name,
+        //                BusinessArea = practice.BusinessArea,
+        //                PracticeTypeDescription = practice.PracticeTypeDescription,
+        //                Email { get; set; }
+        //                OfficePhone { get; set; }
+        //                ContactPhone { get; set; }
+        //                WorkingHours { get; set; }
+        //                CoordinateX { get; set; }
+        //                CoordinateY { get; set; }
+        //                NumberOfPatients { get; set; }
+        //                ReferToSpecialistHealthCare { get; set; }
+        //                PeerGroup { get; set; }
+        //                PreventivePrograms { get; set; }
+        //                GroupPracticeOnlyForDoctorsInConcession { get; set; }
+        //                CouncilOnlyForEmployees { get; set; }
+        //                Council { get; set; }
+        //                EHealth { get; set; }
+        //                SchedulingPatients { get; set; }
+        //                SickLeaveRate { get; set; }
+        //                MedicationPrescription { get; set; }
+        //                ReferToPrimaryLaboratory { get; set; }
+        //                CronicDiseasePanel { get; set; }
+        //                SamplesForPrimaryLabAnalysis { get; set; }
+        //                TelephoneConsultation { get; set; }
+        //                PercentageOfFirstSystematicExaminationBefore2MonthsOfLife { get; set; }
+        //                FeedingPanelTracking { get; set; }
+        //                TakingSamplesForPrimaryLabAnalysis { get; set; }
+        //                EmergencyPhone { get; set; }
+        //                OlderWomenWithTVSExamination { get; set; }
+        //                YoungerWomenContraceptionCouncil { get; set; }
+        //                TakingAndDeliveryOfSamplesForMicrobiologyDiagnostics { get; set; }
+        //                PortionOfPreventiveProcedures { get; set; }
+        //                PersonsWithDentalStatus { get; set; }
+        //                SpecialNeedsDentalCare { get; set; }
+        //            }
+        //        }
+
+
+
+                
+        //        return practice;
+        //    }
+        //}
     }
 }
