@@ -24,7 +24,6 @@ namespace Hack.DataLayer
         public int CityID { get; set; }
         public string BusinessArea { get; set; }
         public string PracticeTypeDescription { get; set; }
-        public string POBox { get; set; }
         public string Email { get; set; }
         public string OfficePhone { get; set; }
         public string ContactPhone { get; set; }

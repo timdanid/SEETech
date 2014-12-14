@@ -12,21 +12,18 @@ namespace Hack.DataLayer
     using System;
     using System.Collections.Generic;
     
-    public partial class City
+    public partial class County
     {
-        public City()
+        public County()
         {
-            this.Practices = new HashSet<Practice>();
+            this.Cities = new HashSet<City>();
         }
     
         public int ID { get; set; }
         public string Name { get; set; }
-        public string POBox { get; set; }
-        public int CountyID { get; set; }
         public int CountryID { get; set; }
     
-        public virtual County County { get; set; }
+        public virtual ICollection<City> Cities { get; set; }
         public virtual Country Country { get; set; }
-        public virtual ICollection<Practice> Practices { get; set; }
     }
 }

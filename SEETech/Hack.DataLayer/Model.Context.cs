@@ -26,6 +26,8 @@ namespace Hack.DataLayer
         }
     
         public virtual DbSet<City> Cities { get; set; }
+        public virtual DbSet<County> Counties { get; set; }
+        public virtual DbSet<Country> Countries { get; set; }
         public virtual DbSet<DoctorStatus> DoctorStatuses { get; set; }
         public virtual DbSet<Practice> Practices { get; set; }
         public virtual DbSet<PracticeType> PracticeTypes { get; set; }

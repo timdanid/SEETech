@@ -4,16 +4,21 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="ad3877fb5dec40e79f6d87d8c522e95b" Name="Diagram1">
-        <EntityTypeShape EntityType="hackModel.City" Width="1.5" PointX="3.75" PointY="3.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="hackModel.DoctorStatus" Width="1.5" PointX="3.75" PointY="10.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="hackModel.Practice" Width="1.5" PointX="6" PointY="2.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="hackModel.PracticeType" Width="1.5" PointX="0.75" PointY="6.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="hackModel.PracticeTypeThreshold" Width="1.5" PointX="3" PointY="6.625" IsExpanded="true" />
-        <AssociationConnector Association="hackModel.FK_Practices_Cities" ManuallyRouted="false" />
-        <AssociationConnector Association="hackModel.FK_Practices_DoctorStatuses" ManuallyRouted="false" />
-        <AssociationConnector Association="hackModel.FK_Practices_PracticeTypes" ManuallyRouted="false" />
-        <AssociationConnector Association="hackModel.FK_PracticeTypeThresholds_PracticeTypes" ManuallyRouted="false" />
+      <Diagram DiagramId="a2bb4123d65840fcbff1a8d713c09cce" Name="Diagram1">
+        <EntityTypeShape EntityType="HackModel.City" Width="1.5" PointX="5.25" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="HackModel.County" Width="1.5" PointX="3" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="HackModel.Country" Width="1.5" PointX="0.75" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="HackModel.DoctorStatus" Width="1.5" PointX="5.25" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="HackModel.Practice" Width="1.5" PointX="7.5" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="HackModel.PracticeType" Width="1.5" PointX="5.25" PointY="11.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="HackModel.PracticeTypeThreshold" Width="1.5" PointX="7.5" PointY="15.375" IsExpanded="true" />
+        <AssociationConnector Association="HackModel.FK_Cities_Counties" ManuallyRouted="false" />
+        <AssociationConnector Association="HackModel.FK_Cities_Countries" ManuallyRouted="false" />
+        <AssociationConnector Association="HackModel.FK_Practices_Cities" ManuallyRouted="false" />
+        <AssociationConnector Association="HackModel.FK_Counties_Countries" ManuallyRouted="false" />
+        <AssociationConnector Association="HackModel.FK_Practices_DoctorStatuses" ManuallyRouted="false" />
+        <AssociationConnector Association="HackModel.FK_Practices_PracticeTypes" ManuallyRouted="false" />
+        <AssociationConnector Association="HackModel.FK_PracticeTypeThresholds_PracticeTypes" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

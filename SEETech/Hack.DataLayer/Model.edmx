@@ -4,16 +4,31 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="hackModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="HackModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Cities">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="County" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Country" Type="nvarchar(max)" Nullable="false" />
           <Property Name="POBox" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="CountyID" Type="int" Nullable="false" />
+          <Property Name="CountryID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Counties">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="CountryID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Countries">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
         <EntityType Name="DoctorStatuses">
           <Key>
@@ -36,7 +51,6 @@
           <Property Name="CityID" Type="int" Nullable="false" />
           <Property Name="BusinessArea" Type="nvarchar(max)" Nullable="false" />
           <Property Name="PracticeTypeDescription" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="POBox" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
           <Property Name="OfficePhone" Type="nvarchar(max)" Nullable="false" />
           <Property Name="ContactPhone" Type="nvarchar(max)" Nullable="false" />
@@ -86,6 +100,42 @@
           <Property Name="Average" Type="int" Nullable="false" />
           <Property Name="Maximum" Type="int" Nullable="false" />
         </EntityType>
+        <Association Name="FK_Cities_Counties">
+          <End Role="Counties" Type="Self.Counties" Multiplicity="1" />
+          <End Role="Cities" Type="Self.Cities" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Counties">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Cities">
+              <PropertyRef Name="CountyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cities_Countries">
+          <End Role="Countries" Type="Self.Countries" Multiplicity="1" />
+          <End Role="Cities" Type="Self.Cities" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Countries">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Cities">
+              <PropertyRef Name="CountryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Counties_Countries">
+          <End Role="Countries" Type="Self.Countries" Multiplicity="1" />
+          <End Role="Counties" Type="Self.Counties" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Countries">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Counties">
+              <PropertyRef Name="CountryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Practices_Cities">
           <End Role="Cities" Type="Self.Cities" Multiplicity="1" />
           <End Role="Practices" Type="Self.Practices" Multiplicity="*" />
@@ -134,12 +184,26 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="hackModelStoreContainer">
+        <EntityContainer Name="HackModelStoreContainer">
           <EntitySet Name="Cities" EntityType="Self.Cities" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Counties" EntityType="Self.Counties" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Countries" EntityType="Self.Countries" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DoctorStatuses" EntityType="Self.DoctorStatuses" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Practices" EntityType="Self.Practices" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PracticeTypes" EntityType="Self.PracticeTypes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PracticeTypeThresholds" EntityType="Self.PracticeTypeThresholds" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Cities_Counties" Association="Self.FK_Cities_Counties">
+            <End Role="Counties" EntitySet="Counties" />
+            <End Role="Cities" EntitySet="Cities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cities_Countries" Association="Self.FK_Cities_Countries">
+            <End Role="Countries" EntitySet="Countries" />
+            <End Role="Cities" EntitySet="Cities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Counties_Countries" Association="Self.FK_Counties_Countries">
+            <End Role="Countries" EntitySet="Countries" />
+            <End Role="Counties" EntitySet="Counties" />
+          </AssociationSet>
           <AssociationSet Name="FK_Practices_Cities" Association="Self.FK_Practices_Cities">
             <End Role="Cities" EntitySet="Cities" />
             <End Role="Practices" EntitySet="Practices" />
@@ -161,17 +225,38 @@
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="hackModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="HackModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="City">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="County" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Country" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="POBox" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CountyID" Type="Int32" Nullable="false" />
+          <Property Name="CountryID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="County" Relationship="Self.FK_Cities_Counties" FromRole="Cities" ToRole="Counties" />
+          <NavigationProperty Name="Country" Relationship="Self.FK_Cities_Countries" FromRole="Cities" ToRole="Countries" />
           <NavigationProperty Name="Practices" Relationship="Self.FK_Practices_Cities" FromRole="Cities" ToRole="Practices" />
+        </EntityType>
+        <EntityType Name="County">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CountryID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Cities" Relationship="Self.FK_Cities_Counties" FromRole="Counties" ToRole="Cities" />
+          <NavigationProperty Name="Country" Relationship="Self.FK_Counties_Countries" FromRole="Counties" ToRole="Countries" />
+        </EntityType>
+        <EntityType Name="Country">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Cities" Relationship="Self.FK_Cities_Countries" FromRole="Countries" ToRole="Cities" />
+          <NavigationProperty Name="Counties" Relationship="Self.FK_Counties_Countries" FromRole="Countries" ToRole="Counties" />
         </EntityType>
         <EntityType Name="DoctorStatus">
           <Key>
@@ -195,7 +280,6 @@
           <Property Name="CityID" Type="Int32" Nullable="false" />
           <Property Name="BusinessArea" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="PracticeTypeDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="POBox" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="OfficePhone" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="ContactPhone" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
@@ -251,6 +335,30 @@
           <Property Name="Maximum" Type="Int32" Nullable="false" />
           <NavigationProperty Name="PracticeType" Relationship="Self.FK_PracticeTypeThresholds_PracticeTypes" FromRole="PracticeTypeThresholds" ToRole="PracticeTypes" />
         </EntityType>
+        <Association Name="FK_Cities_Counties">
+          <End Role="Counties" Type="Self.County" Multiplicity="1" />
+          <End Role="Cities" Type="Self.City" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Counties">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Cities">
+              <PropertyRef Name="CountyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cities_Countries">
+          <End Role="Countries" Type="Self.Country" Multiplicity="1" />
+          <End Role="Cities" Type="Self.City" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Countries">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Cities">
+              <PropertyRef Name="CountryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Practices_Cities">
           <End Role="Cities" Type="Self.City" Multiplicity="1" />
           <End Role="Practices" Type="Self.Practice" Multiplicity="*" />
@@ -260,6 +368,18 @@
             </Principal>
             <Dependent Role="Practices">
               <PropertyRef Name="CityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Counties_Countries">
+          <End Role="Countries" Type="Self.Country" Multiplicity="1" />
+          <End Role="Counties" Type="Self.County" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Countries">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Counties">
+              <PropertyRef Name="CountryID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -301,13 +421,27 @@
         </Association>
         <EntityContainer Name="HackEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Cities" EntityType="Self.City" />
+          <EntitySet Name="Counties" EntityType="Self.County" />
+          <EntitySet Name="Countries" EntityType="Self.Country" />
           <EntitySet Name="DoctorStatuses" EntityType="Self.DoctorStatus" />
           <EntitySet Name="Practices" EntityType="Self.Practice" />
           <EntitySet Name="PracticeTypes" EntityType="Self.PracticeType" />
           <EntitySet Name="PracticeTypeThresholds" EntityType="Self.PracticeTypeThreshold" />
+          <AssociationSet Name="FK_Cities_Counties" Association="Self.FK_Cities_Counties">
+            <End Role="Counties" EntitySet="Counties" />
+            <End Role="Cities" EntitySet="Cities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cities_Countries" Association="Self.FK_Cities_Countries">
+            <End Role="Countries" EntitySet="Countries" />
+            <End Role="Cities" EntitySet="Cities" />
+          </AssociationSet>
           <AssociationSet Name="FK_Practices_Cities" Association="Self.FK_Practices_Cities">
             <End Role="Cities" EntitySet="Cities" />
             <End Role="Practices" EntitySet="Practices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Counties_Countries" Association="Self.FK_Counties_Countries">
+            <End Role="Countries" EntitySet="Countries" />
+            <End Role="Counties" EntitySet="Counties" />
           </AssociationSet>
           <AssociationSet Name="FK_Practices_DoctorStatuses" Association="Self.FK_Practices_DoctorStatuses">
             <End Role="DoctorStatuses" EntitySet="DoctorStatuses" />
@@ -327,20 +461,37 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="hackModelStoreContainer" CdmEntityContainer="HackEntities">
+        <EntityContainerMapping StorageEntityContainer="HackModelStoreContainer" CdmEntityContainer="HackEntities">
           <EntitySetMapping Name="Cities">
-            <EntityTypeMapping TypeName="hackModel.City">
+            <EntityTypeMapping TypeName="HackModel.City">
               <MappingFragment StoreEntitySet="Cities">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="County" ColumnName="County" />
-                <ScalarProperty Name="Country" ColumnName="Country" />
                 <ScalarProperty Name="POBox" ColumnName="POBox" />
+                <ScalarProperty Name="CountyID" ColumnName="CountyID" />
+                <ScalarProperty Name="CountryID" ColumnName="CountryID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Counties">
+            <EntityTypeMapping TypeName="HackModel.County">
+              <MappingFragment StoreEntitySet="Counties">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CountryID" ColumnName="CountryID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Countries">
+            <EntityTypeMapping TypeName="HackModel.Country">
+              <MappingFragment StoreEntitySet="Countries">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="DoctorStatuses">
-            <EntityTypeMapping TypeName="hackModel.DoctorStatus">
+            <EntityTypeMapping TypeName="HackModel.DoctorStatus">
               <MappingFragment StoreEntitySet="DoctorStatuses">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -348,7 +499,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Practices">
-            <EntityTypeMapping TypeName="hackModel.Practice">
+            <EntityTypeMapping TypeName="HackModel.Practice">
               <MappingFragment StoreEntitySet="Practices">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="RUPS" ColumnName="RUPS" />
@@ -360,7 +511,6 @@
                 <ScalarProperty Name="CityID" ColumnName="CityID" />
                 <ScalarProperty Name="BusinessArea" ColumnName="BusinessArea" />
                 <ScalarProperty Name="PracticeTypeDescription" ColumnName="PracticeTypeDescription" />
-                <ScalarProperty Name="POBox" ColumnName="POBox" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="OfficePhone" ColumnName="OfficePhone" />
                 <ScalarProperty Name="ContactPhone" ColumnName="ContactPhone" />
@@ -396,7 +546,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="PracticeTypes">
-            <EntityTypeMapping TypeName="hackModel.PracticeType">
+            <EntityTypeMapping TypeName="HackModel.PracticeType">
               <MappingFragment StoreEntitySet="PracticeTypes">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -404,7 +554,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="PracticeTypeThresholds">
-            <EntityTypeMapping TypeName="hackModel.PracticeTypeThreshold">
+            <EntityTypeMapping TypeName="HackModel.PracticeTypeThreshold">
               <MappingFragment StoreEntitySet="PracticeTypeThresholds">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="PracticeTypeID" ColumnName="PracticeTypeID" />
