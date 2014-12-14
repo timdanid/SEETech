@@ -57,10 +57,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\App.DataLayer\App.DataLayer.csproj">
-      <Project>{05707bf2-dd6a-41b3-96f6-ef890192ef47}</Project>
-      <Name>App.DataLayer</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Hack.DataLayer\Hack.DataLayer.csproj">
       <Project>{d3c268c4-a472-4592-a95d-a233a8babb61}</Project>
       <Name>Hack.DataLayer</Name>

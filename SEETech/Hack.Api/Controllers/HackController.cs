@@ -100,66 +100,65 @@ namespace Hack.Api.Controllers
             }
         }
 
-        //[EnableCors("*", "*", "*")]
-        //[Route("api/GetPracticesDetails")]
-        //public object GetPracticesDetails(int id)
-        //{
-        //    using (HackEntities entities = new HackEntities())
-        //    {
-        //        Practice practice = entities.Practices.FirstOrDefault(x => x.ID == id);
+        [EnableCors("*", "*", "*")]
+        [Route("api/GetPracticesDetails")]
+        public object GetPracticesDetails(int id)
+        {
+            using (HackEntities entities = new HackEntities())
+            {
+                Practice practice = entities.Practices.FirstOrDefault(x => x.ID == id);
 
-        //        if (practice != null)
-        //        {
-        //            object result = new
-        //            {
-        //                RUPS = practice.RUPS,
-        //                PracticeCode = practice.PracticeCode,
-        //                PracticeName = practice.PracticeName,
-        //                PracticeType = practice.PracticeType.Name,
-        //                DoctorStatus = practice.DoctorStatus.Name,
-        //                Address = practice.Address,
-        //                City = practice.City.Name,
-        //                BusinessArea = practice.BusinessArea,
-        //                PracticeTypeDescription = practice.PracticeTypeDescription,
-        //                Email { get; set; }
-        //                OfficePhone { get; set; }
-        //                ContactPhone { get; set; }
-        //                WorkingHours { get; set; }
-        //                CoordinateX { get; set; }
-        //                CoordinateY { get; set; }
-        //                NumberOfPatients { get; set; }
-        //                ReferToSpecialistHealthCare { get; set; }
-        //                PeerGroup { get; set; }
-        //                PreventivePrograms { get; set; }
-        //                GroupPracticeOnlyForDoctorsInConcession { get; set; }
-        //                CouncilOnlyForEmployees { get; set; }
-        //                Council { get; set; }
-        //                EHealth { get; set; }
-        //                SchedulingPatients { get; set; }
-        //                SickLeaveRate { get; set; }
-        //                MedicationPrescription { get; set; }
-        //                ReferToPrimaryLaboratory { get; set; }
-        //                CronicDiseasePanel { get; set; }
-        //                SamplesForPrimaryLabAnalysis { get; set; }
-        //                TelephoneConsultation { get; set; }
-        //                PercentageOfFirstSystematicExaminationBefore2MonthsOfLife { get; set; }
-        //                FeedingPanelTracking { get; set; }
-        //                TakingSamplesForPrimaryLabAnalysis { get; set; }
-        //                EmergencyPhone { get; set; }
-        //                OlderWomenWithTVSExamination { get; set; }
-        //                YoungerWomenContraceptionCouncil { get; set; }
-        //                TakingAndDeliveryOfSamplesForMicrobiologyDiagnostics { get; set; }
-        //                PortionOfPreventiveProcedures { get; set; }
-        //                PersonsWithDentalStatus { get; set; }
-        //                SpecialNeedsDentalCare { get; set; }
-        //            }
-        //        }
+                if (practice != null)
+                {
+                    object result = new
+                    {
+                        RUPS = practice.RUPS,
+                        PracticeCode = practice.PracticeCode,
+                        PracticeName = practice.PracticeName,
+                        PracticeType = practice.PracticeType.Name,
+                        DoctorStatus = practice.DoctorStatus.Name,
+                        Address = practice.Address,
+                        City = practice.City.Name,
+                        BusinessArea = practice.BusinessArea,
+                        PracticeTypeDescription = practice.PracticeTypeDescription,
+                        Email = practice.Email,
+                        OfficePhone = practice.OfficePhone,
+                        ContactPhone = practice.ContactPhone,
+                        WorkingHours = practice.WorkingHours,
+                        CoordinateX = practice.CoordinateX,
+                        CoordinateY = practice.CoordinateY,
+                        NumberOfPatients = practice.NumberOfPatients,
+                        ReferToSpecialistHealthCare = practice.ReferToSpecialistHealthCare,
+                        PeerGroup = practice.PeerGroup,
+                        PreventivePrograms = practice.PreventivePrograms,
+                        GroupPracticeOnlyForDoctorsInConcession = practice.GroupPracticeOnlyForDoctorsInConcession,
+                        CouncilOnlyForEmployees = practice.CouncilOnlyForEmployees,
+                        Council = practice.Council,
+                        EHealth = practice.EHealth,
+                        SchedulingPatients = practice.SchedulingPatients,
+                        SickLeaveRate = practice.SickLeaveRate,
+                        MedicationPrescription = practice.MedicationPrescription,
+                        ReferToPrimaryLaboratory = practice.ReferToPrimaryLaboratory,
+                        CronicDiseasePanel = practice.CronicDiseasePanel,
+                        SamplesForPrimaryLabAnalysis = practice.SamplesForPrimaryLabAnalysis,
+                        TelephoneConsultation = practice.TelephoneConsultation,
+                        PercentageOfFirstSystematicExaminationBefore2MonthsOfLife = practice.PercentageOfFirstSystematicExaminationBefore2MonthsOfLife,
+                        FeedingPanelTracking = practice.FeedingPanelTracking,
+                        TakingSamplesForPrimaryLabAnalysis = practice.TakingSamplesForPrimaryLabAnalysis,
+                        EmergencyPhone = practice.EmergencyPhone,
+                        OlderWomenWithTVSExamination = practice.OlderWomenWithTVSExamination,
+                        YoungerWomenContraceptionCouncil = practice.YoungerWomenContraceptionCouncil,
+                        TakingAndDeliveryOfSamplesForMicrobiologyDiagnostics = practice.TakingAndDeliveryOfSamplesForMicrobiologyDiagnostics,
+                        PortionOfPreventiveProcedures = practice.PortionOfPreventiveProcedures,
+                        PersonsWithDentalStatus = practice.PersonsWithDentalStatus,
+                        SpecialNeedsDentalCare = practice.SpecialNeedsDentalCare
+                    };
 
+                    return result;
+                }
 
-
-                
-        //        return practice;
-        //    }
-        //}
+                return null;
+            }
+        }
     }
 }
