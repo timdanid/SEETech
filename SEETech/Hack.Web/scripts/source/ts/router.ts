@@ -13,16 +13,14 @@
         }
 
         public getProvinces(callback: Function): void {
-
-            callback(new Array<Province>(new Province("a", "abc")));
-            //$.ajax({
-            //    url: this.url + "",
-            //    context: document.body
-            //}).done((data: Array<Province>) => {
-            //        callback(data);
-            //}).fail((Error: any) => {
-            //        this.error(Error);
-            //    });
+            $.ajax({
+                url: this.url + "GetAllCounties",
+                context: document.body
+            }).done((data: Array<Province>) => {
+                    callback(data);
+            }).fail((Error: any) => {
+                    this.error(Error);
+                });
         }
 
         public getCities(provinceName: string, callback: Function): void {
@@ -30,27 +28,22 @@
                 url: this.url + "GetCitiesForCounty?countyname=" + provinceName,
                 context: document.body
             }).done((data: Array<City>) => {
+                console.log(data);
                    callback(data);
                 }).fail((Error: any) => {
                     this.error(Error);
                 });
         }
 
-        public getList(json: string, callback: Function): void {
-            var a = {
-                href: "/#/detail/id/",
-                name: "ime",
-                location: "abaafccacac"
-            };
-            callback(new Array<any>(a, a));
-             //$.ajax({
-            //    url: this.url + "",
-            //    context: document.body
-            //}).done((data: string) => {
-            //        callback(data);
-            //    }).fail((Error: any) => {
-            //        this.error(Error);
-            //    });
+        public getList(query: string, general: boolean, preschool : boolean, women: boolean, dental: boolean, callback: Function): void {
+            $.ajax({
+                url: this.url + "GetPracticesList?query=" + query + "&general=" + general + "&preschool=" + preschool + "&women=" + women + "&dental=" + dental
+            }).done((data: any) => {
+                console.log(data);
+                    callback(data);
+                }).fail((Error: any) => {
+                    this.error(Error);
+                });
         }
 
         public getDetail(id: number, callback: Function): void {
