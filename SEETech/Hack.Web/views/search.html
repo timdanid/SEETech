@@ -1,11 +1,21 @@
 ﻿<div id="search">
-    <p>
+    <div>
         Županija: <select data-bind="options: provinces, optionsText: 'name', value: selectedProvince, optionsCaption: 'Izaberi županiju'"></select>
+    </div>
+    <div>
         Grad: <select data-bind="options: cities, optionsText: 'name', value: selectedCity, optionsCaption: 'Izaberi grad'"></select>
+    </div>
+    <div>
         Opća: <input type="checkbox" data-bind="checked: general" />
+    </div>
+    <div>
         Zubar: <input type="checkbox" data-bind="checked: dental" />
+    </div>
+    <div>
         Žene: <input type="checkbox" data-bind="checked: woman" />
+    </div>
+    <div>
         Djeca: <input type="checkbox" data-bind="checked: preschool" />
-    </p>
+    </div>
     <a class="btn btn-default" data-bind="href: navigateToList()">Search</a>
 </div>
