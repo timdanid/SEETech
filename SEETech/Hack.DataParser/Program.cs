@@ -27,8 +27,51 @@ namespace Hack.DataParser
             string[] count_zene = System.IO.File.ReadAllLines(@"C:\Hackaton\count_zene.csv");
             string[] count_zubari = System.IO.File.ReadAllLines(@"C:\Hackaton\count_zubari.csv");
 
+            // countries, counties, cities
             using (HackEntities entities = new HackEntities())
             {
+                Console.WriteLine("Adding countries, counties, cities...");
+
+                foreach (var line in koordinate)
+                {
+                    var values = line.Split(';');
+
+                    string pobox = values[10].Trim();
+                    string cityName = values[11].Trim();
+                    string countyName = values[12].Trim();
+                    string countryName = values[13].Trim();
+
+                    Country country = entities.Countries.FirstOrDefault(x => x.Name.ToLower() == countryName.ToLower());
+                    if (country == null)
+                    {
+                        country = new Country();
+                        country.Name = countryName;
+                        entities.Countries.Add(country);
+                    }
+
+                    County county = entities.Counties.FirstOrDefault(x => x.Name.ToLower() == countyName.ToLower());
+                    if (county == null)
+                    {
+                        county = new County();
+                        county.Name = countyName;
+                        county.Country = country;
+                        entities.Counties.Add(county);
+                    }
+
+                    City city = entities.Cities.FirstOrDefault(x => x.Name.ToLower() == countyName.ToLower());
+                    if (city == null)
+                    {
+                        city = new City();
+                        city.Name = cityName;
+                        city.County = county;
+                        city.Country = country;
+                        city.POBox = pobox;
+                        entities.Cities.Add(city);
+                    }
+                }
+
+                entities.SaveChanges();
+
                 Console.WriteLine("Adding opca...");
 
                 foreach (string line in opca)
@@ -41,7 +84,7 @@ namespace Hack.DataParser
                     //practice.PracticeName = values[2].Trim();
                     practice.DoctorStatus = GetDoctorStatus(entities, values[3].Trim().ToLower());
                     practice.Address = values[4].Trim();
-                    practice.City = EnsureCity(entities, values[5].Trim());
+                    practice.City = GetCity(entities, values[5].Trim());
                     practice.SickLeaveRate = values[6].Trim().ToLower() == "da";
                     practice.MedicationPrescription = values[7].Trim().ToLower() == "da";
                     practice.ReferToSpecialistHealthCare = values[8].Trim().ToLower() == "da";
@@ -57,7 +100,7 @@ namespace Hack.DataParser
                     practice.SamplesForPrimaryLabAnalysis = values[18].Trim().ToLower() == "da";
                     practice.TelephoneConsultation = values[19].Trim().ToLower() == "da";
 
-                    SetLocationProperties(practice, novo, koordinate);
+                    SetLocationProperties(entities, practice, novo, koordinate);
                     SetCountProperties(practice, count_opca);
 
                     entities.Practices.Add(practice);
@@ -75,7 +118,7 @@ namespace Hack.DataParser
                     //practice.PracticeName = values[2].Trim();
                     practice.DoctorStatus = GetDoctorStatus(entities, values[3].Trim().ToLower());
                     practice.Address = values[4].Trim();
-                    practice.City = practice.City = EnsureCity(entities, values[5].Trim());
+                    practice.City = GetCity(entities, values[5].Trim());
                     practice.MedicationPrescription = values[6].Trim().ToLower() == "da";
                     practice.ReferToSpecialistHealthCare = values[7].Trim().ToLower() == "da";
                     practice.ReferToPrimaryLaboratory = values[8].Trim().ToLower() == "da";
@@ -92,7 +135,7 @@ namespace Hack.DataParser
                     practice.TakingSamplesForPrimaryLabAnalysis = values[18].Trim().ToLower() == "da";
                     practice.EmergencyPhone = values[19].Trim().ToLower() == "da";
 
-                    SetLocationProperties(practice, novo, koordinate);
+                    SetLocationProperties(entities, practice, novo, koordinate);
                     SetCountProperties(practice, count_predskolska);
 
                     entities.Practices.Add(practice);
@@ -110,7 +153,7 @@ namespace Hack.DataParser
                     //practice.PracticeName = values[2].Trim();
                     practice.DoctorStatus = GetDoctorStatus(entities, values[3].Trim().ToLower());
                     practice.Address = values[4].Trim();
-                    practice.City = EnsureCity(entities, values[5].Trim());
+                    practice.City = GetCity(entities, values[5].Trim());
                     practice.SickLeaveRate = values[6].Trim().ToLower() == "da";
                     practice.MedicationPrescription = values[7].Trim().ToLower() == "da";
                     practice.ReferToSpecialistHealthCare = values[8].Trim().ToLower() == "da";
@@ -127,7 +170,7 @@ namespace Hack.DataParser
                     practice.TakingSamplesForPrimaryLabAnalysis = values[19].Trim().ToLower() == "da";
                     practice.TakingAndDeliveryOfSamplesForMicrobiologyDiagnostics = values[20].Trim().ToLower() == "da";
 
-                    SetLocationProperties(practice, novo, koordinate);
+                    SetLocationProperties(entities, practice, novo, koordinate);
                     SetCountProperties(practice, count_zene);
 
                     entities.Practices.Add(practice);
@@ -145,7 +188,7 @@ namespace Hack.DataParser
                     //practice.PracticeName = values[2].Trim();
                     practice.DoctorStatus = GetDoctorStatus(entities, values[3].Trim().ToLower());
                     practice.Address = values[4].Trim();
-                    practice.City = EnsureCity(entities, values[5].Trim());
+                    practice.City = GetCity(entities, values[5].Trim());
                     practice.ReferToSpecialistHealthCare = values[6].Trim().ToLower() == "da";
                     practice.PortionOfPreventiveProcedures = values[7].Trim().ToLower() == "da";
                     practice.PersonsWithDentalStatus = values[8].Trim().ToLower() == "da";
@@ -159,7 +202,7 @@ namespace Hack.DataParser
                     practice.EmergencyPhone = values[16].Trim().ToLower() == "da";
                     practice.SpecialNeedsDentalCare = values[17].Trim().ToLower() == "da";
 
-                    SetLocationProperties(practice, novo, koordinate);
+                    SetLocationProperties(entities, practice, novo, koordinate);
                     SetCountProperties(practice, count_zubari);
 
                     entities.Practices.Add(practice);
@@ -177,9 +220,9 @@ namespace Hack.DataParser
                     //practice.PracticeName = values[2].Trim();
                     practice.DoctorStatus = GetDoctorStatus(entities, values[3].Trim().ToLower());
                     practice.Address = values[4].Trim();
-                    practice.City = EnsureCity(entities, values[5].Trim());
+                    practice.City = GetCity(entities, values[5].Trim());
 
-                    SetLocationProperties(practice, novo, koordinate);
+                    SetLocationProperties(entities, practice, novo, koordinate);
 
                     entities.Practices.Add(practice);
                 }
@@ -196,21 +239,9 @@ namespace Hack.DataParser
             return entities.DoctorStatuses.First(x => x.Name.ToLower() == doctorStatus.ToLower());
         }
 
-        public static City EnsureCity(HackEntities entities, string cityName)
+        public static City GetCity(HackEntities entities, string cityName)
         {
-            City city = entities.Cities.FirstOrDefault(x => x.Name.ToLower() == cityName.ToLower());
-
-            if (city == null)
-            {
-                city = new City();
-                city.Name = cityName;
-                city.County = "";
-                city.Country = "";
-                city.POBox = "";
-            }
-
-            entities.Cities.Add(city);
-            return city;
+            return entities.Cities.First(x => x.Name.ToLower() == cityName.ToLower());
         }
 
         private static void SetCountProperties(Practice practice, string[] counts)
@@ -228,7 +259,7 @@ namespace Hack.DataParser
             }
         }
 
-        static void SetLocationProperties(Practice practice, string[] novo, string[] koordinate)
+        static void SetLocationProperties(HackEntities entities, Practice practice, string[] novo, string[] koordinate)
         {
             foreach (string line in novo)
             {
@@ -240,7 +271,6 @@ namespace Hack.DataParser
                     practice.PracticeName = values[2].Trim();
                     practice.BusinessArea = values[3].Trim();
                     practice.PracticeTypeDescription = values[4].Trim();
-                    practice.POBox = values[8].Trim();
                     practice.Email = values[10].Trim();
                     practice.OfficePhone = values[11].Trim();
                     practice.ContactPhone = values[12].Trim();
@@ -255,8 +285,6 @@ namespace Hack.DataParser
 
                         if (geoid == geoid2)
                         {
-                            practice.City.County = values2[12].Trim();
-                            practice.City.Country = values2[13].Trim();
                             practice.CoordinateX = values2[14].Trim();
                             practice.CoordinateY = values2[15].Trim();
                         }
