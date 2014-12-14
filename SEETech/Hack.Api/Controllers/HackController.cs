@@ -54,5 +54,14 @@ namespace Hack.Api.Controllers
                 return null;
             }
         }
+
+        [Route("api/GetAllCounties")]
+        public object GetAllCounties(string countyName)
+        {
+            using (HackEntities entities = new HackEntities())
+            {
+                return entities.Counties.Select(t => new { id = t.ID, name = t.Name }).ToList();
+            }
+        }
     }
 }
