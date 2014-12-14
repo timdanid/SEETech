@@ -30,7 +30,7 @@ namespace Hack.DataLayer
         public string WorkingHours { get; set; }
         public string CoordinateX { get; set; }
         public string CoordinateY { get; set; }
-        public int NumberOfPatients { get; set; }
+        public Nullable<int> NumberOfPatients { get; set; }
         public bool ReferToSpecialistHealthCare { get; set; }
         public bool PeerGroup { get; set; }
         public bool PreventivePrograms { get; set; }
